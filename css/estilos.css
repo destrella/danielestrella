@@ -86,6 +86,12 @@ body > header a:focus svg,
 body > header a:hover svg{
 	fill:var(--color-resaltado);
 }
+main{
+	background:url(../img/logo.svg) 50% 100% no-repeat;
+	background-size: 2rem;
+	padding-bottom: 1.5rem;
+	margin-bottom: .5rem;
+}
 p{
 	max-width:36em;
 	margin:1em auto;
