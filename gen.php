@@ -52,7 +52,7 @@ if(!empty($args['rutatipo'])
 && ($args['rutatipo'] == 'relativa' || $args['rutatipo'] = 'absoluta')):
 	define('RUTA', $args['rutatipo']);
 else:
-	define('RUTA', 'relativa');
+	define('RUTA', 'absoluta');
 endif;
 //Define si imprime mensajes de depuración o no
 if(isset($args['debug'])):
@@ -220,8 +220,14 @@ foreach($entradas as $t=>$entrada):
 
 		if(!empty($entrada['fotos'][0]['src'])):
 			$fotodestacada = $entrada['fotos'][0]['src'];
+			$foturl = parse_url($entrada['fotos'][0]['src']);
+			$foturl = $foturl['scheme'].'://'.$foturl['host'];
+			$preconnect =
+			'<link rel="preconnect" href="'.$foturl.'" crossorigin>'.
+			'<link rel="dns-prefetch" href="'.$foturl.'">';
 		else:
 			$fotodestacada = NOFOTO;
+			$preconnect = '';
 		endif;
 
 		if($entant || $entsig):
@@ -247,13 +253,12 @@ foreach($entradas as $t=>$entrada):
 	<title>
 		{$entrada['título']} — DanielEstrella.com
 	</title>
-	<link rel="preconnect" href="https://beewax.com.mx/" crossorigin>
-	<link rel="dns-prefetch" href="https://beewax.com.mx/">
+	{$preconnect}
 	<meta name="description" content="{$entrada['resumen']}">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta property="og:title" content="{$entrada['título']} — DanielEstrella.com">
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="{$_(DOM)}{$entrada['slug']}{$trailing}">
+	<meta property="og:url" content="{$_(DOM)}/{$entrada['slug']}{$trailing}">
 	<meta property="og:image" content="{$fotodestacada}">
 	<link rel="apple-touch-icon" href="{$_(IMGURL)}apple-touch-icon.png">
 	<script src="{$uri}/js/prefixfree.min.js"></script>
@@ -264,7 +269,7 @@ foreach($entradas as $t=>$entrada):
 </head>
 <body>
 	<header>
-		<h1><a href="{$uri}{$trailing}"><svg xmlns="http://www.w3.org/2000/svg" version="1.0" viewBox="0 0 3000 1970" aria-hidden="true"><path d="M468 1938a707 707 0 01-303-187A545 545 0 012 1451c-6-65 11-146 33-160 6-3 66 49 134 117 182 184 305 239 532 240 100 0 143-6 212-27a732 732 0 00472-518c38-129 40-242 8-368a498 498 0 00-132-250c-149-163-383-191-660-78-136 56-196 66-299 47C155 426 46 351 13 251-9 191-1 0 21 0c5 0 18 19 31 43s42 52 68 65c70 36 144 30 304-26 125-44 152-50 253-50 126-1 217 19 346 79a972 972 0 01429 376c22 39 44 72 47 72 4 0 25-33 48-72a972 972 0 01429-376c128-60 220-80 345-79 101 0 129 6 254 50 159 56 233 62 304 26 26-13 54-41 67-65 14-24 27-43 31-43 11 0 23 79 23 156 0 180-154 300-387 301-86 2-107-3-216-48-274-115-511-87-660 76a498 498 0 00-132 250c-22 89-28 240-12 300 6 24 10 20 23-29 20-75 117-172 198-200 90-31 153-26 244 18 65 32 93 38 162 40 95 0 140-22 190-90l30-40v56c0 120-34 224-100 291-99 106-218 117-411 37-86-35-94-37-162-25-55 11-78 22-105 50l-32 36 35 69a736 736 0 00456 385c79 23 288 19 373-6 132-39 207-88 336-219 68-68 127-120 133-117 23 14 39 95 33 160-9 94-70 205-163 300a730 730 0 01-320 192c-76 22-105 25-220 19-165-9-290-40-434-111a746 746 0 01-312-288c-23-41-44-73-48-73-3 0-25 32-47 73-135 238-416 386-757 397-127 5-152 3-227-22z"/></svg> Daniel Estrella</a></h1>
+		<h1><a href="{$uri}{$trailing}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 1970" aria-hidden="true"><path d="M468 1938a707 707 0 01-303-187A545 545 0 012 1451c-6-65 11-146 33-160 6-3 66 49 134 117 182 184 305 239 532 240 100 0 143-6 212-27a732 732 0 00472-518c38-129 40-242 8-368a498 498 0 00-132-250c-149-163-383-191-660-78-136 56-196 66-299 47C155 426 46 351 13 251-9 191-1 0 21 0c5 0 18 19 31 43s42 52 68 65c70 36 144 30 304-26 125-44 152-50 253-50 126-1 217 19 346 79a972 972 0 01429 376c22 39 44 72 47 72 4 0 25-33 48-72a972 972 0 01429-376c128-60 220-80 345-79 101 0 129 6 254 50 159 56 233 62 304 26 26-13 54-41 67-65 14-24 27-43 31-43 11 0 23 79 23 156 0 180-154 300-387 301-86 2-107-3-216-48-274-115-511-87-660 76a498 498 0 00-132 250c-22 89-28 240-12 300 6 24 10 20 23-29 20-75 117-172 198-200 90-31 153-26 244 18 65 32 93 38 162 40 95 0 140-22 190-90l30-40v56c0 120-34 224-100 291-99 106-218 117-411 37-86-35-94-37-162-25-55 11-78 22-105 50l-32 36 35 69a736 736 0 00456 385c79 23 288 19 373-6 132-39 207-88 336-219 68-68 127-120 133-117 23 14 39 95 33 160-9 94-70 205-163 300a730 730 0 01-320 192c-76 22-105 25-220 19-165-9-290-40-434-111a746 746 0 01-312-288c-23-41-44-73-48-73-3 0-25 32-47 73-135 238-416 386-757 397-127 5-152 3-227-22z"/></svg> Daniel Estrella</a></h1>
 		<nav><a href="{$uri}/p/acerca-de{$trailing}">Acerca de…</a></nav>
 	</header>
 	<main>
@@ -292,7 +297,7 @@ HTML;
 		//break 1;
 	endif;
 endforeach;
-
+/* PENDIENTE
 if($reindexar):
 	$paginación = '';
 	$porpágina = 30;
@@ -302,4 +307,5 @@ if($reindexar):
 		$paginación .= '<a href="/archivo/p/'.$i.'/">'.$i.'</a>';
 	endfor;
 endif;
+*/
 ?>
