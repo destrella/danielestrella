@@ -250,6 +250,7 @@ foreach($entradas as $t=>$entrada):
 		else:
 			$navantsig = '';
 		endif;
+		$cssadicional .= $entrada['inlinecs'];
 		//Plantilla
 		$html =<<<HTML
 <!doctype html>

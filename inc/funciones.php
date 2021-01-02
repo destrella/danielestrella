@@ -30,7 +30,8 @@ function normalizaEntrada($entrada, $t){
 			['src' => '','mime' => '']
 		],
 		'dsc'=>''
-		]]
+		]],
+		'inlinecs'=>''
 	];
 	$entrada['t'] = $t;
 	$entrada = array_merge($blank, $entrada);
