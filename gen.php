@@ -81,8 +81,14 @@ foreach (glob("src/*.php") as $archivo):
 	include $archivo;
 endforeach;
 */
-//include 'src/2003.php';
-include 'src/2021.php';
+$incluir = [
+	'2003',
+	'2004',
+	'2005'
+];
+foreach($incluir as $incluye):
+	include 'src/'.$incluye.'.php';
+endforeach;
 
 //foreach($entradas as $k=>$v){echo '['.date('m/Y',$k).'] ';}echo PHP_EOL;
 ksort($entradas);
