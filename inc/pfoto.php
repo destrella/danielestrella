@@ -1,5 +1,4 @@
 <?php defined('TIPO') or die();
-//tamaños imgpile: foto.jpg, foto.md.jpg, foto.th.jpg
 $cuerpo .=
 '<article class="'.TIPO[$entrada['tipo']].'">';
 if(!empty($entrada['fotos'][0]['src'])):
