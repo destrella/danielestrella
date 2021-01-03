@@ -411,6 +411,7 @@ summary{
 .más-entradas{
 	position:relative;
 	display:flex;
+	flex-wrap: wrap;
 	padding-top:4em;
 	gap:1em;
 	justify-content: center;
