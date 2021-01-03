@@ -13,11 +13,11 @@ if(!empty($entrada['resumen'])):
 endif;
 
 if(!empty($entrada['fotos'])):
-	$cuerpo .= 
+	$cuerpo .=
 	'<div class="fotoDestacada">'.
 	imgtag($entrada['fotos'][0], $entrada, '100vw').
 	'</div>';
-	unset($entrada['fotos'[0]]);
+	unset($entrada['fotos'][0]);
 
 	foreach($entrada['fotos'] as $k=>$f):
 		$busca = '[FOTO]';

@@ -10,19 +10,7 @@ function normalizaEntrada($entrada, $t){
 	"contenido"=>'',
 	"ubicación"=>'',
 	"idioma"=>'es',
-	"fotos"=>[[
-		'src' => '',
-		'set'=>[
-			'avif'=>'',
-			'webp'=>'',
-			'jpg'=>''
-		],
-		'tan'=>0,
-		'tal'=>0,
-		'alt'=>'',
-		'dsc'=>'',
-		'lnk'=>''
-		]],
+	"fotos"=>[],
 	"videos"=>[[
 		'iframe' => '',
 		'html' => [
