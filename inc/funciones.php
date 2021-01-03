@@ -65,7 +65,7 @@ function _r($msg, $l){
 		return $msg;
 	endif;
 }
-function imgtag($f, $entrada){
+function imgtag($f, $entrada, $ancho = FALSE){
 	foreach($f as $attr=>$val):
 		if(is_string($val)):
 			$f[$attr] = trim($val);
@@ -81,8 +81,14 @@ function imgtag($f, $entrada){
 			$sizes = '100vw';
 			break;
 		case 3://Galería
-		default:
 			$sizes = '320px';
+			break;
+		default:
+			if(!$ancho):
+				$sizes = '320px';
+			else:
+				$sizes = $ancho;
+			endif;
 			break;
 	endswitch;
 
