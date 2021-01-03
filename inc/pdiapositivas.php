@@ -90,7 +90,7 @@ CSS;
 .gslider > #cs_slide1_{$k}:checked ~ .cs_description > .num{$k} .cs_wrapper,
 .gslider > #cs_pause1_{$k}:checked ~ .cs_description > .num{$k} .cs_wrapper,
 CSS;
-	if(!empty($f['alt'])):
+	if(!empty($f['tit'])):
 		$gc['dscfx'] .=
 		'.gslider > #cs_play1:checked ~ .cs_description > .num'.$k.' > .cs_title'.
 		'{animation: cs_title1 '.$durfxms.'ms infinite '.($retfxms+600).'ms ease}'.
@@ -121,12 +121,12 @@ HTML;
 	'<li class="num'.$k.' img slide">'.
 	imgtag($f, $entrada).
 	'</li>';
-	if(!empty($f['alt']) || !empty($f['dsc'])):
+	if(!empty($f['tit']) || !empty($f['dsc'])):
 		$gh['description'] .= '<label class="num'.$k.'">';
 	endif;
-	if(!empty($f['alt'])):
+	if(!empty($f['tit'])):
 		$gh['description'] .=<<<HTML
-<span class="cs_title"><span class="cs_wrapper">{$f['alt']}</span></span>
+<span class="cs_title"><span class="cs_wrapper">{$f['tit']}</span></span>
 HTML;
 	endif;
 	if(!empty($f['dsc'])):
@@ -134,7 +134,7 @@ HTML;
 <span class="cs_descr"><span class="cs_wrapper">{$f['dsc']}</span></span>
 HTML;
 	endif;
-	if(!empty($f['alt']) || !empty($f['dsc'])):
+	if(!empty($f['tit']) || !empty($f['dsc'])):
 		$gh['description'] .= '</label>';
 	endif;
 	$gh['bplaypause'] .=<<<HTML
