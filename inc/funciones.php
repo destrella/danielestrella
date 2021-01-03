@@ -11,15 +11,8 @@ function normalizaEntrada($entrada, $t){
 	"ubicación"=>'',
 	"idioma"=>'es',
 	"fotos"=>[],
-	"videos"=>[[
-		'iframe' => '',
-		'html' => [
-			//Puede tener múltiple <source>
-			['src' => '','mime' => '']
-		],
-		'dsc'=>''
-		]],
-		'inlinecs'=>''
+	"videos"=>[],
+	'inlinecs'=>''
 	];
 	$entrada['t'] = $t;
 	$entrada = array_merge($blank, $entrada);
@@ -31,7 +24,7 @@ function normalizaEntrada($entrada, $t){
 	$entrada['título'] = trim($entrada['título']);
 	if(empty($entrada['título'])):
 		$entrada['título'] = $entrada['fechaLarga'];
-		$entrada['slug'] = ARC.date('dHis', $entrada['t']);
+		$entrada['slug'] = ARC.date('Y/m/dHis', $entrada['t']);
 	else:
 		$entrada['slug'] = ARC.date('Y/m/', $entrada['t']).slug($entrada['título']);
 	endif;
