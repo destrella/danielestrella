@@ -75,6 +75,36 @@ function imgtag($f, $entrada, $ancho = FALSE){
 
 	$source = '';
 	//elemento "source"
+
+	if(empty($f['set'])):
+		//Asume siempre avif, webp y jpg en la misma ruta
+		$ancmin = $ancact = 640;
+		$ancmax = 3840;
+		$cuantos = $f['tan'] / $ancmin;
+		$f['set'] = ['avif'=>'', 'webp'=>'', 'jpg'=>''];
+		$f['src'] = str_ireplace('.jpg', '', $f['src']);
+		for($i = 1; $i <= $cuantos; $i++):
+			$sourceimg = empty($f['set']['avif'])?'':', ';
+			$sourceimg .= $f['src'].'-'.$ancact;
+			$f['set']['avif'] .= $sourceimg.'.avif '.$ancact.'w';
+			$f['set']['webp'] .= $sourceimg.'.webp '.$ancact.'w';
+			$f['set']['jpg'] .= $sourceimg.'.jpg '.$ancact.'w';
+
+			if($ancact + $ancmin > $ancmax && is_int($cuantos)):
+				break;
+			elseif($ancact + $ancmin > $f['tan'] && !is_int($cuantos)):
+				$sourceimg = empty($f['set']['avif'])?'':', ';
+				$sourceimg .= $f['src'].'-'.$f['tan'];
+				$f['set']['avif'] .= $sourceimg.'.avif '.$f['tan'].'w';
+				$f['set']['webp'] .= $sourceimg.'.webp '.$f['tan'].'w';
+				$f['set']['jpg'] .= $sourceimg.'.jpg '.$f['tan'].'w';
+			else:
+				$ancact += $ancmin;
+			endif;
+		endfor;
+		$f['src'] .= '-'.$f['tan'].'.jpg';
+	endif;
+
 	foreach($f['set'] as $formato=>$imgsrc):
 		//Formato jpg es sólo último recurso
 		if($formato == 'jpg'
@@ -97,9 +127,12 @@ function imgtag($f, $entrada, $ancho = FALSE){
 		' sizes="'.$sizes.'"';
 	endif;
 	if(!empty($f['alt'])):
-		$attrs .= ' alt="'.$f['alt'].'" title="'.$f['alt'].'"';
+		$attrs .= ' alt="'.$f['alt'].'"';
 	else:
 		$attrs .= ' alt=""';
+	endif;
+	if(!empty($f['tit'])):
+		$attrs .= ' title="'.$f['tit'].'"';
 	endif;
 	if(!empty($f['tan'])):
 		$attrs .= ' width="'.$f['tan'].'"';
