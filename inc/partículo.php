@@ -8,7 +8,8 @@ endif;
 
 $cuerpo .= '<footer>'.$timetag.'</footer>';
 
-if(!empty($entrada['resumen'])):
+if(!empty($entrada['resumen'])
+&& '<p>'.$entrada['resumen'].'</p>' != $entrada['contenido']):
 	$cuerpo .= '<p>'.$entrada['resumen'].'</p>';
 endif;
 

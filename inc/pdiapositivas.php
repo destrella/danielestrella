@@ -173,7 +173,8 @@ $cuerpo .=
 implode(PHP_EOL,$gh).
 '</div><div class="contenido">'.
 '<h2>'.$entrada['título'].'</h2>';
-if(!empty($entrada['resumen'])):
+if(!empty($entrada['resumen'])
+&& '<p>'.$entrada['resumen'].'</p>' != $entrada['contenido']):
 	$cuerpo .= '<p>'.$entrada['resumen'].'</p>';
 endif;
 if(!empty($entrada['contenido'])):

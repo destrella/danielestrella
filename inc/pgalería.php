@@ -8,7 +8,8 @@ if(!empty($entrada['título'])):
 	$timetag.
 	'</header>';
 endif;
-if(!empty($entrada['resumen'])):
+if(!empty($entrada['resumen'])
+&& '<p>'.$entrada['resumen'].'</p>' != $entrada['contenido']):
 	$cuerpo .= '<p>'.$entrada['resumen'].'</p>';
 endif;
 if(!empty($entrada['contenido'])):

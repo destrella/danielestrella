@@ -3,7 +3,8 @@ $cuerpo .=
 '<article class="'.TIPO[$entrada['tipo']].'">'.
 '<div>';
 
-if($resumen && !empty($entrada['resumen'])):
+if($resumen && !empty($entrada['resumen'])
+&& '<p>'.$entrada['resumen'].'</p>' != $entrada['contenido']):
 	$cuerpo .= '<p>'.$entrada['resumen'].'</p>';
 endif;
 if(!empty($entrada['contenido'])):
