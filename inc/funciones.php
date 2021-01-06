@@ -199,10 +199,16 @@ function gfycat($v)
 	$vid = explode('ifr/', $v);
 	if(!empty($vid[1])):
 		$vid = explode("'", $vid[1])[0];
+		$anc = explode("width='", $v)[1];
+		$anc = explode("'", $anc)[0];
+		$alt = explode("height='", $v)[1];
+		$alt = explode("'", $alt)[0];
 		$v =
 		'<video controls autoplay loop muted playsinline'.
 		' poster="https://thumbs.gfycat.com/'.$vid.'-poster.jpg"'.
 		' tabindex="-1"'.
+		' width="'.$anc.'"'.
+		' height="'.$alt.'"'.
 		'>'.
 		'<source '.
 		'src="https://giant.gfycat.com/'.$vid.'.webm" '.
