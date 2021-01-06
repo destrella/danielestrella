@@ -180,7 +180,7 @@ time{
 	content: '';
 	top: 0;
 	left: 0;
-	background:var(--fondologo);
+	background:var(--fondo-logo);
 	background-size:10%;
 	bottom: 0;
 	right: 300px;
