@@ -497,6 +497,16 @@ summary{
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+.paginación ul{
+	padding:1em 0 0;
+	display: flex;
+	align-content: center;
+	justify-content: center;
+	list-style: none;
+	gap: 1em;
+	border-top:1px solid var(--color-borde)
+}
+
 /*PIE*/
 body > footer{
 	text-align:center;
