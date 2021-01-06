@@ -125,15 +125,19 @@ time{
 	width:1px;
 	height:1px;
 	border:none;
-	opacity: 0;
+	opacity: .1;
 	position:fixed;
+	top:0;left:0;
 	z-index:-99;
 }
 .contenido h2{
 	border-bottom:1px solid var(--color-borde);
 	padding-bottom:.25em;
 }
-
+.fotoDestacada img{
+	width:auto;
+	max-height:60vh;
+}
 .foto,
 .video,
 .diapositivas{
@@ -148,7 +152,8 @@ time{
 }
 .foto img{
 	border-radius:5px 0 0 5px;
-
+	max-height: calc(100vh - 5rem);
+	width: auto;
 }
 .foto .contenido,
 .video .contenido,
@@ -194,7 +199,7 @@ picture::after{
 	position:absolute;
 	top:0;
 	left:0;
-	right:0;
+	right:-1px;
 	bottom:0;
 	box-shadow:0 0 16px inset #000;
 }
