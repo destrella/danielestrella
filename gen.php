@@ -3,7 +3,7 @@ $args = FALSE;
 if(PHP_SAPI == 'cli'):
 	$args = getopt(
 		't::',
-		['debug','reindexar','dominio::','archivo::','rutatipo::']
+		['debug','forzar','reindexar','dominio::','archivo::','rutatipo::']
 	);
 elseif(!empty($_SERVER['REQUEST_METHOD'])):
 	if($_SERVER['REQUEST_METHOD']=='POST'):
@@ -60,6 +60,13 @@ if(isset($args['debug'])):
 else:
 	define('DEBUG', FALSE);
 endif;
+//Define si se vuelven a generar las entradas existentes
+if(isset($args['forzar'])):
+	define('FORZAR', TRUE);
+else:
+	define('FORZAR', FALSE);
+endif;
+
 //Define si se reindexan las entradas
 if(isset($args['reindexar'])):
 	$reindexar = TRUE;
@@ -73,6 +80,7 @@ const TIPO = ['artículo', 'foto', 'diapositivas', 'galería', 'estado', 'enlace
 const IMGURL = 'https://beewax.com.mx/i/';
 const NOFOTO = IMGURL.'nofoto.png';
 include('inc/funciones.php');
+const LOGO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 1970" aria-hidden="true"><path d="M468 1938a707 707 0 01-303-187A545 545 0 012 1451c-6-65 11-146 33-160 6-3 66 49 134 117 182 184 305 239 532 240 100 0 143-6 212-27a732 732 0 00472-518c38-129 40-242 8-368a498 498 0 00-132-250c-149-163-383-191-660-78-136 56-196 66-299 47C155 426 46 351 13 251-9 191-1 0 21 0c5 0 18 19 31 43s42 52 68 65c70 36 144 30 304-26 125-44 152-50 253-50 126-1 217 19 346 79a972 972 0 01429 376c22 39 44 72 47 72 4 0 25-33 48-72a972 972 0 01429-376c128-60 220-80 345-79 101 0 129 6 254 50 159 56 233 62 304 26 26-13 54-41 67-65 14-24 27-43 31-43 11 0 23 79 23 156 0 180-154 300-387 301-86 2-107-3-216-48-274-115-511-87-660 76a498 498 0 00-132 250c-22 89-28 240-12 300 6 24 10 20 23-29 20-75 117-172 198-200 90-31 153-26 244 18 65 32 93 38 162 40 95 0 140-22 190-90l30-40v56c0 120-34 224-100 291-99 106-218 117-411 37-86-35-94-37-162-25-55 11-78 22-105 50l-32 36 35 69a736 736 0 00456 385c79 23 288 19 373-6 132-39 207-88 336-219 68-68 127-120 133-117 23 14 39 95 33 160-9 94-70 205-163 300a730 730 0 01-320 192c-76 22-105 25-220 19-165-9-290-40-434-111a746 746 0 01-312-288c-23-41-44-73-48-73-3 0-25 32-47 73-135 238-416 386-757 397-127 5-152 3-227-22z"/></svg>';
 
 $entradas = [];
 /**Incluye todos los archivos .php en la carpeta "src" */
@@ -82,16 +90,16 @@ foreach (glob("src/*.php") as $archivo):
 endforeach;
 */
 $incluir = [
-	'2003',
-	'2004',
-	'2005'
+//	'2003',
+//	'2021',
+	'testent'
 ];
 foreach($incluir as $incluye):
 	include 'src/'.$incluye.'.php';
 endforeach;
 
 //foreach($entradas as $k=>$v){echo '['.date('m/Y',$k).'] ';}echo PHP_EOL;
-ksort($entradas);
+krsort($entradas);
 //foreach($entradas as $k=>$v){echo '['.date('m/Y',$k).'] ';}echo PHP_EOL;
 //die();
 //Total de entradas
@@ -127,27 +135,37 @@ endif;
 include('inc/wp-sanitize.php');
 
 if(RUTA == 'relativa'):
-	$uri = '../../../..';// archivo/año/mes/nota/index.html
-	$trailing = '/index.html';
+	// archivo/año/mes/nota/index.html
+	define('URI', '../../../..');
+	define('TRAILING', '/index.html');
+	define('URIPAG', '../..');
 else:
-	$uri = DOM;
-	$trailing = '/';
+	define('URI', DOM);
+	define('TRAILING', '/');
+	define('URIPAG', DOM);
 endif;
+
+//Variables para crear las paáginas de indice, incluyendo index.html
+$paginasindice = 1;
+$totalporindice = 30;
+$totalactual = 0;
+$entradaenportada = '';
+$masentradas = [];
 
 $indice = array_keys($entradas);
 foreach($entradas as $t=>$entrada):
 	$entrada['t'] = $t;
 	$entrada = normalizaEntrada($entrada, $t);
 
-	if(isset($indice[array_search($t, $indice)-1])):
-		$antid = $indice[array_search($t, $indice)-1];
+	if(isset($indice[array_search($t, $indice)+1])):
+		$antid = $indice[array_search($t, $indice)+1];
 
 		$entant = normalizaEntrada($entradas[$antid], $antid);
 	else:
 		$entant = FALSE;
 	endif;
-	if(isset($indice[array_search($t, $indice)+1])):
-		$sigid = $indice[array_search($t, $indice)+1];
+	if(isset($indice[array_search($t, $indice)-1])):
+		$sigid = $indice[array_search($t, $indice)-1];
 		$entsig = normalizaEntrada($entradas[$sigid], $sigid);
 	else:
 		$entsig = FALSE;
@@ -173,23 +191,15 @@ foreach($entradas as $t=>$entrada):
 		continue;
 	endif;
 
-	$timetag = '<time datetime="'.date('c', $t).'" title="'.$entrada['fechaLarga'].'">'.$entrada['fechaLarga'].'</time>';
 	//Estructura de archivo en base a año y mes
 	$publicado = $entrada['slug'].'/index.html';
-	//Si no existe resúmen crea uno a partir del contenido
-	$entrada['resumen'] = trim($entrada['resumen']);
-	$resumen = true;
-	if(empty($entrada['resumen'])):
-		$resumen = false;
-		$entrada['resumen'] = generaResumen($entrada['contenido']);
-	endif;
 	$entrada['contenido'] = trim($entrada['contenido']);
 
 	$cssadicional = '';
 	$jsadicional = ['encabezado'=>'', 'pie'=>''];
 
 	if(!is_file($publicado)
-	|| DEBUG):
+	|| DEBUG || FORZAR):
 		//Crea ruta de directorios si no existe
 		if(!is_dir($entrada['slug'])):
 			echo _r('ⓘ Directorio(s) '.$entrada['slug'].' no existe(n),', __LINE__);
@@ -201,27 +211,54 @@ foreach($entradas as $t=>$entrada):
 			endif;
 		endif;
 
-		if(DEBUG):/**Usa versión sin minificar si es depuración */
+		if(DEBUG):
+			/**Usa versión sin minificar si es depuración */
 			$min = '';
-		else:/**Versión minificada si no lo es */
+		else:
+			/**Versión minificada si no lo es */
 			$min = '.min';
 		endif;
 
 		$cuerpo = '';
 		//Comprueba el tipo de entrada a usar
-		if(is_file('inc/p'.TIPO[$entrada['tipo']].'.php')):
-			include 'inc/p'.TIPO[$entrada['tipo']].'.php';
+		$función = 'e'.TIPO[$entrada['tipo']];
+		if(is_callable($función)):
+			$cnt = $función($entrada);
+			$cuerpo .= $cnt['cuerpo'];
 		else:
-			$cuerpo .=
-			'<article class="'.TIPO[$entrada['tipo']].'">'.
-			'<h2>'.$entrada['título'].'</h2>';
-			if($resumen && !empty($entrada['resumen'])):
-				$cuerpo .= '<p>'.$entrada['resumen'].'</p>';
+			$cnt = eartículo($entrada);
+			$cuerpo .= $cnt['cuerpo'];
+		endif;
+
+		//Si no existe resúmen crea uno a partir del contenido
+		$entrada['resumen'] = trim($entrada['resumen']);
+		if(empty($entrada['resumen'])):
+			$entrada['resumen'] = generaResumen($entrada['contenido']);
+		endif;
+
+		if(RUTA == 'relativa'):
+			if($paginasindice == 1):
+				$uripag = '.';
+			else:
+				$uripag = '../..';
 			endif;
-			if(!empty($entrada['contenido'])):
-				$cuerpo .= $entrada['contenido'];
-			endif;
-			$cuerpo .= '<footer>'.$timetag.'</footer></article>';
+		else:
+			$uripag = URIPAG;
+		endif;
+		if(empty($entradaenportada)):
+			//Guarda la ultima entrada para la portada
+			$entradaenportada = $cuerpo;
+		elseif(!empty($masentradas[$paginasindice])):
+			//Genera contenido para "más entradas"
+			$masentradas[$paginasindice] .= resumenparaindice($entrada, $uripag);
+		else:
+			$masentradas[$paginasindice] = resumenparaindice($entrada, $uripag);
+		endif;
+		if($totalactual < $totalporindice):
+			$totalactual++;
+		else:
+			$paginasindice++;
+			$totalactual = 0;
 		endif;
 
 		if(!empty($entrada['fotos'][0]['src'])):
@@ -240,17 +277,19 @@ foreach($entradas as $t=>$entrada):
 			$navantsig = '<nav class="antes-despues">';
 			if($entsig):
 				$navantsig .=
-				'<a class="izq" href="'.$uri.'/'.$entsig['slug'].$trailing.'" title="'.$entsig['título'].'">&#62212;</a>';
+				'<a class="izq" href="'.URI.'/'.$entsig['slug'].TRAILING.'" title="'.$entsig['título'].'">&#62212;</a>';
 			endif;
 			if($entant):
 				$navantsig .=
-				'<a class="der" href="'.$uri.'/'.$entant['slug'].$trailing.'" title="'.$entant['título'].'">&#62213;</a>';
+				'<a class="der" href="'.URI.'/'.$entant['slug'].TRAILING.'" title="'.$entant['título'].'">&#62213;</a>';
 			endif;
 			$navantsig .= '</nav>';
 		else:
 			$navantsig = '';
 		endif;
-		$cssadicional .= $entrada['inlinecs'];
+		$cssadicional .=
+		$cnt['CSSadicional'].
+		$entrada['inlinecs'];
 		//Plantilla
 		$html =<<<HTML
 <!doctype html>
@@ -265,19 +304,19 @@ foreach($entradas as $t=>$entrada):
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 	<meta property="og:title" content="{$entrada['título']} — DanielEstrella.com">
 	<meta property="og:type" content="website">
-	<meta property="og:url" content="{$_(DOM)}/{$entrada['slug']}{$trailing}">
+	<meta property="og:url" content="{$_(DOM)}/{$entrada['slug']}{$_(TRAILING)}">
 	<meta property="og:image" content="{$fotodestacada}">
 	<link rel="apple-touch-icon" href="{$_(IMGURL)}apple-touch-icon.png">
-	<script src="{$uri}/js/prefixfree.min.js"></script>
-	<link rel="stylesheet" href="{$uri}/css/fuentes{$min}.css">
-	<link rel="stylesheet" href="{$uri}/css/estilos{$min}.css">
+	<script src="{$_(URI)}/js/prefixfree.min.js"></script>
+	<link rel="stylesheet" href="{$_(URI)}/css/fuentes{$min}.css">
+	<link rel="stylesheet" href="{$_(URI)}/css/estilos{$min}.css">
 	{$cssadicional}
 	<meta name="generator" content="DEstrella.mx">
 </head>
 <body>
 	<header>
-		<h1><a href="{$uri}{$trailing}"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3000 1970" aria-hidden="true"><path d="M468 1938a707 707 0 01-303-187A545 545 0 012 1451c-6-65 11-146 33-160 6-3 66 49 134 117 182 184 305 239 532 240 100 0 143-6 212-27a732 732 0 00472-518c38-129 40-242 8-368a498 498 0 00-132-250c-149-163-383-191-660-78-136 56-196 66-299 47C155 426 46 351 13 251-9 191-1 0 21 0c5 0 18 19 31 43s42 52 68 65c70 36 144 30 304-26 125-44 152-50 253-50 126-1 217 19 346 79a972 972 0 01429 376c22 39 44 72 47 72 4 0 25-33 48-72a972 972 0 01429-376c128-60 220-80 345-79 101 0 129 6 254 50 159 56 233 62 304 26 26-13 54-41 67-65 14-24 27-43 31-43 11 0 23 79 23 156 0 180-154 300-387 301-86 2-107-3-216-48-274-115-511-87-660 76a498 498 0 00-132 250c-22 89-28 240-12 300 6 24 10 20 23-29 20-75 117-172 198-200 90-31 153-26 244 18 65 32 93 38 162 40 95 0 140-22 190-90l30-40v56c0 120-34 224-100 291-99 106-218 117-411 37-86-35-94-37-162-25-55 11-78 22-105 50l-32 36 35 69a736 736 0 00456 385c79 23 288 19 373-6 132-39 207-88 336-219 68-68 127-120 133-117 23 14 39 95 33 160-9 94-70 205-163 300a730 730 0 01-320 192c-76 22-105 25-220 19-165-9-290-40-434-111a746 746 0 01-312-288c-23-41-44-73-48-73-3 0-25 32-47 73-135 238-416 386-757 397-127 5-152 3-227-22z"/></svg> Daniel Estrella</a></h1>
-		<nav><a href="{$uri}/p/acerca-de{$trailing}">Acerca de…</a></nav>
+		<h1><a href="{$_(URI)}{$_(TRAILING)}">{$_(LOGO)} Daniel Estrella</a></h1>
+		<nav><a href="{$_(URI)}/p/acerca-de{$_(TRAILING)}">Acerca de…</a></nav>
 	</header>
 	<main>
 		{$cuerpo}
@@ -304,15 +343,114 @@ HTML;
 		//break 1;
 	endif;
 endforeach;
-/* PENDIENTE
-if($reindexar):
-	$paginación = '';
-	$porpágina = 30;
-	$actual = 1;
-	$páginas = ceil($total / $porpágina);
-	for($i = 1; $i <= $páginas; $i++):
-		$paginación .= '<a href="/archivo/p/'.$i.'/">'.$i.'</a>';
-	endfor;
-endif;
-*/
+
+//Índices
+$totalpáginas = count($masentradas);
+foreach($masentradas as $k => $v):
+	$uri = URI;
+	if($k == 1):
+		$idxtítulo = '';
+		$slug = DOM.TRAILING;
+		if(RUTA == 'relativa'):
+			$uri = '.';
+		endif;
+		$titheader = LOGO.' Daniel Estrella';
+		$cuerpo =
+		'<main>'.$entradaenportada.'</main>'.
+		'<aside class="más-entradas">'.$v.'</aside>';
+		$rutaidx = '.';
+	else:
+		$idxtítulo = 'Página '.$k.' — ';
+		$slug = DOM.'/p/'.$k.TRAILING;
+		if(RUTA == 'relativa'):
+			$uri = '../..';
+		endif;
+		$titheader =
+		'<a href="'.DOM.TRAILING.'">'.
+		LOGO.' Daniel Estrella'.
+		'</a>';
+		$cuerpo =
+		'<main class="más-entradas">'.$v.'</main>';
+		$rutaidx = 'p/'.$k;
+	endif;
+	//Paginación
+	if($totalpáginas > 1):
+		$paginación = '<nav class="paginación"><ul>';
+		for($i = 1; $i <= count($masentradas); $i++):
+			if($i == $k):
+				$paginación .=
+				'<li class="actual">'.
+				'<span class="nada">Página </span>'.$i.
+				'</li>';
+			elseif($i == 1):
+				$paginación .=
+				'<li><a href="'.DOM.'">'.
+				'<span class="nada">Página </span>'.$i.
+				'</a></li>';
+			else:
+				$paginación .=
+				'<li><a href="'.DOM.'/p/'.$i.TRAILING.'">'.
+				'<span class="nada">Página </span>'.$i.
+				'</a></li>';
+			endif;
+		endfor;
+		$paginación .= '</ul></nav>';
+	else:
+		$paginación = '';
+	endif;
+	//Plantilla índices
+	$html =<<<HTML
+<!doctype html>
+<html class="no-js" lang="es-MX">
+<head>
+	<meta charset="utf-8">
+	<title>
+		{$idxtítulo}DanielEstrella.com
+	</title>
+	{$preconnect}
+	<meta name="description" content="Sitio web personal de Daniel Estrella, autor de DEstrella.mx">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<meta property="og:title" content="{$idxtítulo}DanielEstrella.com">
+	<meta property="og:type" content="website">
+	<meta property="og:url" content="{$slug}">
+	<meta property="og:image" content="{$_(IMGURL)}apple-touch-icon.png">
+	<link rel="apple-touch-icon" href="{$_(IMGURL)}apple-touch-icon.png">
+	<script src="{$uri}/js/prefixfree.min.js"></script>
+	<link rel="stylesheet" href="{$uri}/css/fuentes{$min}.css">
+	<link rel="stylesheet" href="{$uri}/css/estilos{$min}.css">
+	{$cssadicional}
+	<meta name="generator" content="DEstrella.mx">
+</head>
+<body>
+	<header>
+		<h1>{$titheader}</h1>
+		<nav><a href="{$uri}/p/acerca-de{$_(TRAILING)}">Acerca de…</a></nav>
+	</header>
+	{$cuerpo}
+	{$paginación}
+	<footer>
+		DanielEstrella.com — DEstrella.mx
+	</footer>
+</body>
+</html>
+HTML;
+	$html = minifyhtml($html);
+	//Crea ruta de directorios si no existe
+	if(!is_dir($rutaidx)):
+		echo _r('ⓘ Directorio(s) '.$rutaidx.' no existe(n),', __LINE__);
+		if(mkdir($rutaidx, 0766, true)):
+			echo _r('✓ Directorio '.$rutaidx.' creado con éxito.', __LINE__);
+		else:
+			echo _r('❌ Error al crear el directorio '.$rutaidx.' saltando a siguiente entrada.', __LINE__);
+			continue;
+		endif;
+	endif;
+	$rutaidx .= '/index.html';
+	if(file_put_contents($rutaidx, $html)!==FALSE):
+		echo _r('✓ Índice "'.$k.'" creado con éxito. ('.$rutaidx.')', __LINE__);
+	else:
+		echo _r('❌ Error al crear el índice ['.$rutaidx.'].', __LINE__);
+	endif;
+
+endforeach;
 ?>
