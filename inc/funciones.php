@@ -190,17 +190,48 @@ function generaResumen($cont){
 		endif;
 	endforeach;
 }
-function videotag($e)
+function gfycat($v)
+{
+	if(empty($v)
+	|| strpos($v, 'gfycat')===FALSE):
+		return FALSE;
+	endif;
+	$vid = explode('ifr/', $v);
+	if(!empty($vid[1])):
+		$vid = explode("'", $vid[1])[0];
+		$v =
+		'<video controls autoplay loop muted playsinline'.
+		' poster="https://thumbs.gfycat.com/'.$vid.'-poster.jpg"'.
+		' tabindex="-1"'.
+		'>'.
+		'<source '.
+		'src="https://giant.gfycat.com/'.$vid.'.webm" '.
+		'type="video/webm"'.
+		'>'.
+		'<source '.
+		'src="https://giant.gfycat.com/'.$vid.'.mp4" '.
+		'type="video/mp4"'.
+		'>'.
+		'</video>';
+		return $v;
+	else:
+		return FALSE;
+	endif;
+}
+function videotag($v)
 {
 	$video = '';
-	if(!empty($e['videos'][0]['iframe'])):
-		if(strpos($e['videos'][0]['iframe'],' load=')===FALSE):
-			$e['videos'][0]['iframe'] = str_replace('<iframe', '<iframe load="lazy"', $e['videos'][0]['iframe']);
+	if(!empty($v['iframe'])):
+		if(strpos($v['iframe'], 'gfycat')!==FALSE):
+			return gfycat($v['iframe']);
 		endif;
-		$video .= $e['videos'][0]['iframe'];
-	elseif(!empty($e['videos'][0]['html'][0][0]['src'])):
+		if(strpos($v['iframe'],' load=')===FALSE):
+			$v['iframe'] = str_replace('<iframe', '<iframe load="lazy"', $$v['iframe']);
+		endif;
+		$video .= $v['iframe'];
+	elseif(!empty($v['html'][0][0]['src'])):
 		$video .= '<video controls>';
-		foreach($e['videos'][0]['html'][0] as $vid):
+		foreach($v['html'][0] as $vid):
 			$video .=
 			'<source'.
 			' src="'.$vid['src'].'"'.
@@ -244,7 +275,7 @@ function resumenparaindice($e, $uri = URIPAG)
 		case 6://cita
 			break;
 		case 7://video
-			$res .= videotag($e);
+			$res .= videotag($e['videos'][0]);
 			break;
 		default:
 			if(!empty($e['fotos'][0]['src'])):
@@ -292,8 +323,13 @@ function evideo($e)
 		'JSadicional'=>''
 	];
 	$video['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">'.
-	videotag($e).
+	'<article class="'.TIPO[$e['tipo']].'">';
+	if(!empty($e['videos'][0])):
+		$video['cuerpo'] .= videotag($e['videos'][0]);
+	else:
+		$video['cuerpo'] .= '<picture><img src="'.NOFOTO.'" alt=""></picture>';
+	endif;
+	$video['cuerpo'] .=
 	'<div class="contenido">'.
 	'<h2>'.$e['título'].'</h2>'.
 	contenido($e['resumen'], $e['contenido']).
