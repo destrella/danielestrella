@@ -188,7 +188,8 @@ time{
 	border-right: 1px solid var(--color-borde);
 	z-index:0;
 }
-.video video{
+.video video,
+.video iframe{
 	margin: 0 auto;
 	max-height: calc(100vh - 5rem);
 	z-index:1;
