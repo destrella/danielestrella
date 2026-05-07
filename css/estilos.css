@@ -109,7 +109,7 @@ html{font-size:16px;font-family: system-ui, -apple-system, BlinkMacSystemFont, '
 
 body{
 	display: grid;
-	grid-template-rows: min-content, auto, min-content;
+	grid-template-rows: min-content 1fr min-content;
 	background-color:var(--bg-body);
 	color:var(--text-primary);
 	font-size: calc(16px + (22 - 16) * ((100vw - 300px)/ (3200 - 300)));
@@ -429,6 +429,96 @@ article > section{
 	background: linear-gradient(90deg, transparent 0%, transparent 49.4%, var(--border-default) 49.42%, var(--border-default) 49.48%, transparent 49.5%, transparent 100%);
 }
 
+/* ENTRADAS */
+.fecha-entrada{
+	margin:-1rem 0 2rem;
+	color:var(--text-muted);
+	font-family:"Victor Mono", monospace;
+	font-size:.72rem;
+	text-align:center;
+	text-shadow:none;
+}
+
+.ultimas-entradas h2,
+.archivo-entradas h2{
+	margin:0 0 1rem;
+	font-family:system-ui, -apple-system, sans-serif;
+	font-size:2rem;
+	text-align:center;
+}
+
+.ultimas-entradas{
+	overflow:hidden;
+}
+
+.carrusel-entradas{
+	display:flex;
+	gap:1rem;
+	margin:0 -1rem;
+	overflow-x:auto;
+	padding:.25rem 1rem 1rem;
+	scroll-padding:1rem;
+	scroll-snap-type:x mandatory;
+}
+
+.preview-entrada{
+	background-color:var(--bg-surface);
+	border:1px solid var(--border-default);
+	border-radius:8px;
+	overflow:hidden;
+	text-shadow:none;
+}
+
+.carrusel-entradas .preview-entrada{
+	flex:0 0 clamp(220px, 34vw, 320px);
+	scroll-snap-align:start;
+}
+
+.preview-entrada a{
+	display:grid;
+	gap:.65rem;
+	height:100%;
+	padding:.65rem;
+	border-bottom:0;
+	color:var(--text-heading);
+}
+
+.preview-entrada img{
+	width:100%;
+	aspect-ratio:3 / 4;
+	border-radius:6px;
+	object-fit:cover;
+}
+
+.preview-entrada strong{
+	display:block;
+	font-size:1.05rem;
+	line-height:1.2;
+}
+
+.preview-entrada time{
+	color:var(--text-muted);
+	font-family:"Victor Mono", monospace;
+	font-size:.68rem;
+}
+
+.preview-entrada a:hover strong,
+.preview-entrada a:focus strong{
+	color:var(--accent);
+}
+
+.grid-masonry-entradas{
+	column-count:3;
+	column-gap:1rem;
+}
+
+.grid-masonry-entradas .preview-entrada{
+	display:inline-block;
+	width:100%;
+	margin:0 0 1rem;
+	break-inside:avoid;
+}
+
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -458,6 +548,16 @@ article > section{
         padding: 4px 12px 4px 8px;
         font-size: 12px;
     }
+
+	.grid-masonry-entradas{
+		column-count:1;
+	}
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+	.grid-masonry-entradas{
+		column-count:2;
+	}
 }
 
 /* Mejoras de accesibilidad */
