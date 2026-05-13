@@ -183,6 +183,8 @@ body > header p svg {
 body > header,
 main{
 	padding: 0 calc(max((100% - 980px)/ 2,.6em));
+	width: 100%;
+	min-width: 0;
 }
 
 /* ACERCA DE */
@@ -654,9 +656,53 @@ article > section{
 
 /* Responsive */
 @media (max-width: 768px) {
+	body > header,
+	main{
+		padding-inline:clamp(.75rem, 4vw, 1rem);
+	}
+
+	body > header{
+		grid-template-columns:minmax(0, 1fr) auto;
+		gap:.25rem .75rem;
+		align-items:center;
+		padding-block:.45rem;
+	}
+
+	body > header p{
+		margin:0;
+		min-width:0;
+	}
+
+	body > header p:first-child{
+		overflow:hidden;
+		font-size:clamp(1.05rem, 4.8vw, 1.25rem);
+		text-overflow:ellipsis;
+	}
+
+	body > header p:nth-child(2){
+		grid-column:1 / -1;
+		grid-row:2;
+		color:var(--text-muted);
+		font-size:.78rem;
+		line-height:1.25;
+	}
+
+	body > header p:last-child{
+		grid-column:2;
+		grid-row:1;
+		justify-self:end;
+		font-size:.85rem;
+		white-space:nowrap;
+	}
+
+	article > section{
+		margin:1.25rem 0;
+		padding:clamp(.75rem, 3.5vw, 1rem);
+	}
+
     .imagen-y-texto {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.25rem;
     }
 
     .imagen-derecha .texto-columna,
@@ -670,9 +716,19 @@ article > section{
         padding: 0;
     }
 
+	.imagen-columna{
+		padding:0;
+	}
+
     .texto-columna h2 {
         font-size: 1.75rem;
     }
+
+	.columnas-texto{
+		grid-template-columns:1fr;
+		gap:1.25rem;
+		background:none;
+	}
 
     .live-badge {
         bottom: 12px;
