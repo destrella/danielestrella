@@ -139,6 +139,26 @@ em, i{
 	font-family: "Victor Mono", sans-serif;
 	font-size:.8em;
 }
+quote{
+	display:inline;
+	padding:.08em .4em .12em .55em;
+	border-left:.18em solid var(--accent);
+	border-radius:.35em;
+	background:linear-gradient(90deg, rgba(255,204,0,.18), rgba(255,204,0,.06));
+	box-decoration-break:clone;
+	-webkit-box-decoration-break:clone;
+	color:var(--text-heading);
+	font-family:"Victor Mono", monospace;
+	font-size:.86em;
+	line-height:1.6;
+	text-shadow:none;
+}
+.texto-columna > quote,
+article > section > quote{
+	display:block;
+	margin:1rem 0;
+	padding:.85rem 1rem .85rem 1.15rem;
+}
 
 h1{
 	text-align: center;
