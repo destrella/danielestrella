@@ -318,6 +318,22 @@ article > section{
     aspect-ratio: 2 / 1;
 }
 
+.contenedor-imagen.imagen-horizontal {
+	aspect-ratio: 16 / 9;
+	cursor: default;
+}
+
+.contenedor-imagen.imagen-horizontal img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.imagen-relato-horizontal {
+	padding: 1.5em 0;
+}
+
 /* La imagen y el video comparten el mismo espacio */
 .foto-estatica,
 .live-video {
