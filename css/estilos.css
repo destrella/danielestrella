@@ -278,6 +278,26 @@ article > section{
 	font-family: "Lavishly Yours", cursive;
 }
 
+.foto-estatica-texto{
+	width:min(100%, 440px);
+	margin:2rem auto;
+	padding:.45rem;
+	border:1px solid var(--border-default);
+	border-radius:8px;
+	background:
+		linear-gradient(180deg, rgba(255,255,255,.08), rgba(0,0,0,.2)),
+		var(--bg-surface);
+	box-shadow:0 18px 44px rgba(0,0,0,.22);
+	text-shadow:none;
+}
+
+.foto-estatica-texto img{
+	display:block;
+	width:100%;
+	height:auto;
+	border-radius:6px;
+}
+
 .texto-columna ul {
     list-style-type: none;
     padding: 0;
