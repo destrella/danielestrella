@@ -195,11 +195,252 @@ class LivePhoto {
 }
 
 /**
+ * Lightbox sencillo para galerías de imágenes
+ */
+class GalleryLightbox {
+    constructor() {
+        this.galleries = [];
+        this.currentGallery = null;
+        this.currentIndex = 0;
+        this.isOpen = false;
+        this.lastFocused = null;
+        this.init();
+    }
+
+    init() {
+        const galleryElements = document.querySelectorAll('.galeria-imagenes, [data-lightbox-gallery]');
+
+        if (!galleryElements.length) return;
+
+        this.buildLightbox();
+
+        galleryElements.forEach(gallery => {
+            const items = this.getItems(gallery);
+
+            if (!items.length) return;
+
+            const galleryData = { gallery, items };
+            this.galleries.push(galleryData);
+
+            items.forEach((item, index) => this.prepareTrigger(item, galleryData, index));
+        });
+
+        document.addEventListener('keydown', event => this.onKeydown(event));
+    }
+
+    getItems(gallery) {
+        const usedImages = new Set();
+        const items = [];
+
+        gallery.querySelectorAll('figure').forEach(figure => {
+            const img = figure.querySelector('img');
+
+            if (!img) return;
+
+            usedImages.add(img);
+            items.push(this.createItem(img, figure));
+        });
+
+        gallery.querySelectorAll('img').forEach(img => {
+            if (usedImages.has(img)) return;
+            items.push(this.createItem(img, null));
+        });
+
+        return items;
+    }
+
+    createItem(img, figure) {
+        const link = img.closest('a[href]');
+        const captionElement = figure?.querySelector('figcaption');
+        const caption = img.dataset.caption || captionElement?.textContent.trim() || img.alt || '';
+
+        return {
+            img,
+            link,
+            trigger: link || img,
+            get src() {
+                return img.dataset.full || link?.href || img.currentSrc || img.src;
+            },
+            alt: img.alt || caption,
+            caption
+        };
+    }
+
+    prepareTrigger(item, galleryData, index) {
+        const { trigger } = item;
+        const label = `Abrir imagen ${index + 1} de ${galleryData.items.length}`;
+
+        if (trigger.tagName === 'A') {
+            trigger.classList.add('enlace-galeria');
+            trigger.setAttribute('aria-label', label);
+        } else {
+            trigger.setAttribute('role', 'button');
+            trigger.setAttribute('tabindex', '0');
+            trigger.setAttribute('aria-label', label);
+        }
+
+        trigger.addEventListener('click', event => {
+            event.preventDefault();
+            this.open(galleryData, index);
+        });
+
+        trigger.addEventListener('keydown', event => {
+            if (event.key !== ' ') return;
+
+            event.preventDefault();
+            this.open(galleryData, index);
+        });
+    }
+
+    buildLightbox() {
+        this.lightbox = document.createElement('div');
+        this.lightbox.className = 'lightbox-galeria';
+        this.lightbox.setAttribute('role', 'dialog');
+        this.lightbox.setAttribute('aria-modal', 'true');
+        this.lightbox.setAttribute('aria-label', 'Visor de imágenes');
+        this.lightbox.hidden = true;
+        this.lightbox.innerHTML = `
+            <div class="lightbox-galeria__backdrop" data-lightbox-close></div>
+            <div class="lightbox-galeria__panel">
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__cerrar" data-lightbox-close aria-label="Cerrar imagen">&times;</button>
+                <p class="lightbox-galeria__contador" aria-live="polite"></p>
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__anterior" aria-label="Imagen anterior">&#8249;</button>
+                <img class="lightbox-galeria__imagen" alt="">
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__siguiente" aria-label="Imagen siguiente">&#8250;</button>
+                <p class="lightbox-galeria__caption"></p>
+            </div>
+        `;
+
+        document.body.appendChild(this.lightbox);
+
+        this.image = this.lightbox.querySelector('.lightbox-galeria__imagen');
+        this.caption = this.lightbox.querySelector('.lightbox-galeria__caption');
+        this.counter = this.lightbox.querySelector('.lightbox-galeria__contador');
+        this.closeButton = this.lightbox.querySelector('.lightbox-galeria__cerrar');
+        this.previousButton = this.lightbox.querySelector('.lightbox-galeria__anterior');
+        this.nextButton = this.lightbox.querySelector('.lightbox-galeria__siguiente');
+
+        this.lightbox.querySelectorAll('[data-lightbox-close]').forEach(button => {
+            button.addEventListener('click', () => this.close());
+        });
+
+        this.previousButton.addEventListener('click', () => this.showPrevious());
+        this.nextButton.addEventListener('click', () => this.showNext());
+    }
+
+    open(galleryData, index) {
+        this.currentGallery = galleryData;
+        this.currentIndex = index;
+        this.isOpen = true;
+        this.lastFocused = document.activeElement;
+
+        this.render();
+        this.lightbox.hidden = false;
+        document.body.classList.add('lightbox-abierto');
+
+        requestAnimationFrame(() => {
+            this.lightbox.classList.add('is-open');
+            this.closeButton.focus({ preventScroll: true });
+        });
+    }
+
+    close() {
+        if (!this.isOpen) return;
+
+        this.isOpen = false;
+        this.lightbox.classList.remove('is-open');
+        document.body.classList.remove('lightbox-abierto');
+
+        window.setTimeout(() => {
+            if (this.isOpen) return;
+
+            this.lightbox.hidden = true;
+            this.image.removeAttribute('src');
+            this.caption.textContent = '';
+        }, 180);
+
+        this.lastFocused?.focus?.({ preventScroll: true });
+    }
+
+    render() {
+        const item = this.currentGallery.items[this.currentIndex];
+        const total = this.currentGallery.items.length;
+
+        this.image.src = item.src;
+        this.image.alt = item.alt;
+        this.caption.textContent = item.caption;
+        this.caption.hidden = !item.caption;
+        this.counter.textContent = `${this.currentIndex + 1} / ${total}`;
+        this.counter.hidden = total < 2;
+        this.previousButton.hidden = total < 2;
+        this.nextButton.hidden = total < 2;
+    }
+
+    showPrevious() {
+        const total = this.currentGallery.items.length;
+        this.currentIndex = (this.currentIndex - 1 + total) % total;
+        this.render();
+    }
+
+    showNext() {
+        const total = this.currentGallery.items.length;
+        this.currentIndex = (this.currentIndex + 1) % total;
+        this.render();
+    }
+
+    onKeydown(event) {
+        if (!this.isOpen) return;
+
+        if (event.key === 'Escape') {
+            event.preventDefault();
+            this.close();
+            return;
+        }
+
+        if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            this.showPrevious();
+            return;
+        }
+
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            this.showNext();
+            return;
+        }
+
+        if (event.key === 'Tab') {
+            this.trapFocus(event);
+        }
+    }
+
+    trapFocus(event) {
+        const focusable = Array.from(this.lightbox.querySelectorAll('button:not([hidden])'));
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (!first || !last) return;
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+            return;
+        }
+
+        if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+}
+
+/**
  * Inicialización cuando el DOM está listo
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Crear el manager global
     window.livePhotoManager = new LivePhotoManager();
+    window.galleryLightbox = new GalleryLightbox();
 });
 
 /**
