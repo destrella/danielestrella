@@ -857,6 +857,81 @@ body.pagina-error > main{
 	margin:0;
 }
 
+.paginacion-archivo{
+	display:grid;
+	gap:1rem;
+	margin:2.5rem auto 0;
+	color:var(--text-muted);
+	font-family:"Victor Mono", monospace;
+	font-size:.72rem;
+	text-align:center;
+	text-shadow:none;
+}
+
+.paginacion-archivo p{
+	margin:0;
+}
+
+.paginacion-archivo__saltos,
+.paginacion-archivo ol{
+	display:flex;
+	flex-wrap:wrap;
+	gap:.5rem;
+	justify-content:center;
+	margin:0;
+	padding:0;
+}
+
+.paginacion-archivo ol{
+	list-style:none;
+}
+
+.paginacion-archivo a,
+.paginacion-archivo__saltos > span,
+.paginacion-archivo ol > li > span{
+	display:grid;
+	min-width:2.4rem;
+	min-height:2.4rem;
+	place-items:center;
+	padding:.45rem .75rem;
+	border:1px solid var(--border-default);
+	border-radius:8px;
+	background-color:var(--bg-surface);
+	color:var(--text-heading);
+}
+
+.paginacion-archivo a:hover,
+.paginacion-archivo a:focus{
+	border-color:var(--accent);
+	background-color:var(--bg-surface-alt);
+	color:var(--accent);
+}
+
+.paginacion-archivo .actual{
+	border-color:var(--accent);
+	background-color:var(--accent);
+	color:var(--text-inverse);
+}
+
+.paginacion-archivo .deshabilitado{
+	color:var(--text-muted);
+	opacity:.55;
+}
+
+.paginacion-archivo__salto{
+	min-width:7.5rem;
+}
+
+.oculto-visualmente{
+	position:absolute;
+	width:1px;
+	height:1px;
+	overflow:hidden;
+	clip:rect(0, 0, 0, 0);
+	clip-path:inset(50%);
+	white-space:nowrap;
+}
+
 .espacio-retratos .texto-columna{
 	max-width:760px;
 	margin:0 auto;
