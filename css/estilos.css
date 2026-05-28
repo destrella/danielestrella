@@ -672,6 +672,71 @@ body.lightbox-abierto{
 	background: linear-gradient(90deg, transparent 0%, transparent 49.4%, var(--border-default) 49.42%, var(--border-default) 49.48%, transparent 49.5%, transparent 100%);
 }
 
+/* ERROR 404 */
+body.pagina-error > main{
+	padding-inline:0;
+	overflow:hidden;
+}
+
+.pagina-404{
+	display:grid;
+	min-height:calc(100vh - 8rem);
+	place-items:center;
+	padding:0;
+	text-align:center;
+}
+
+.mensaje-404{
+	display:inline-block;
+	max-width:100%;
+	text-shadow:none;
+}
+
+.numero-404{
+	position:relative;
+	isolation:isolate;
+	display:grid;
+	place-items:center;
+	color:#3f3f3f;
+	font-family:Titulos, Helvetica, Arial, sans-serif;
+	font-size:40vw;
+	font-weight:900;
+	line-height:.62;
+	text-shadow:1px 1px 6px rgba(0,0,0,.35);
+}
+
+.digitos-404{
+	position:relative;
+	z-index:2;
+	display:block;
+}
+
+.emoji-404{
+	position:absolute;
+	z-index:1;
+	top:-1.05em;
+	left:50%;
+	font-size:.16em;
+	line-height:1;
+	pointer-events:none;
+	transform:translateX(-50%);
+	filter:drop-shadow(0 .08em .12em rgba(0,0,0,.4));
+}
+
+.texto-404{
+	display:block;
+	width:max-content;
+	max-width:100vw;
+	margin:.25em auto 0;
+	color:#3f3f3f;
+	font-family:system-ui, -apple-system, sans-serif;
+	font-size:8vw;
+	font-weight:900;
+	line-height:1;
+	text-shadow:1px 1px 3px rgba(0,0,0,.5);
+	white-space:nowrap;
+}
+
 /* ENTRADAS */
 .fecha-entrada{
 	margin:-1rem 0 2rem;
