@@ -13,11 +13,6 @@
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/p/acerca-de/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://danielestrella.com/archivo/</loc>
   <lastmod>2026-05-28T00:00:00-06:00</lastmod>
   <priority>0.80</priority>
@@ -259,11 +254,6 @@
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/05/03171742/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/p/2/</loc>
   <lastmod>2021-03-29T18:52:28+00:00</lastmod>
   <priority>0.80</priority>
 </url>

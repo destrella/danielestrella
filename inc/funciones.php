@@ -1,5 +1,25 @@
 <?php
 $_ = function ($val){return $val;};
+function h($val){
+	return htmlspecialchars((string)$val, ENT_QUOTES, 'UTF-8');
+}
+function mesMinusculas($mes){
+	static $meses = [
+		'Enero'=>'enero',
+		'Febrero'=>'febrero',
+		'Marzo'=>'marzo',
+		'Abril'=>'abril',
+		'Mayo'=>'mayo',
+		'Junio'=>'junio',
+		'Julio'=>'julio',
+		'Agosto'=>'agosto',
+		'Septiembre'=>'septiembre',
+		'Octubre'=>'octubre',
+		'Noviembre'=>'noviembre',
+		'Diciembre'=>'diciembre'
+	];
+	return $meses[$mes] ?? $mes;
+}
 function normalizaEntrada($e, $t){
 	$blank =
 	[
@@ -20,8 +40,13 @@ function normalizaEntrada($e, $t){
 	//Crea una fecha legible
 	$fechaLegible = DÍA[date('N', $e['t'])].', '.date('j', $e['t']).' de '.MES[date('n', $e['t'])].date(' Y', $e['t']).' a las '.date('H:i', $e['t']);
 	$e['fechaLarga'] = $fechaLegible.' GMT'.date('P', $e['t']);
+	$e['fechaISO'] = date('c', $e['t']);
+	$e['fechaArchivo'] = date('j', $e['t']).' de '.mesMinusculas(MES[date('n', $e['t'])]).' de '.date('Y', $e['t']);
+	if(date('H:i', $e['t']) != '00:00'):
+		$e['fechaArchivo'] .= ', '.date('H:i', $e['t']);
+	endif;
 
-	$e['timetag'] = '<time datetime="'.date('c', $t).'" title="'.$e['fechaLarga'].'">'.$fechaLegible.'</time>';
+	$e['timetag'] = '<time datetime="'.$e['fechaISO'].'" title="'.$e['fechaLarga'].'">'.$fechaLegible.'</time>';
 
 	//Si no existe un título, usa la fecha legible
 	$e['título'] = trim($e['título']);
@@ -252,47 +277,76 @@ function videotag($v)
 }
 function resumenparaindice($e, $uri = URIPAG)
 {
-	$res =
-	'<article'.
-	' id="'.$e['t'].'"'.
-	' class="mini-'.TIPO[$e['tipo']].'"'.
-	'>';
+	$res = '<article class="preview-entrada">';
 	if($e['tipo'] == 5
 	&& !empty($e['contenido'])):
 		$lnk = explode('href="', $e['contenido']);
 		if(!empty($lnk[1])):
 			$lnk = explode('" ', $lnk[1])[0];
-			$res .= '<a href="'.$lnk.'" class="lnkext" target="_blank" rel="nofollow">';
+			$res .= '<a href="'.$lnk.'" target="_blank" rel="nofollow">';
 		else:
-			$res .=
-			'<a href="'.$uri.'/'.$e['slug'].TRAILING.'">';
+			$res .= '<a href="'.$uri.'/'.$e['slug'].TRAILING.'">';
 		endif;
 	else:
-		$res .=
-		'<a href="'.$uri.'/'.$e['slug'].TRAILING.'">';
+		$res .= '<a href="'.$uri.'/'.$e['slug'].TRAILING.'">';
 	endif;
-	$res .=
-	'<h3>'.$e['título'].'</h3>'.
-	'<footer>'.$e['timetag'].'</footer>';
+
+	$miniatura = NOFOTO;
+	$alt = 'Miniatura de '.$e['título'];
 	switch($e['tipo']):
 		case 5://enlace
-			$res .= '<picture><img src="'.$uri.'/img/1f517.svg" alt=""></picture>';
-			break;
-		case 6://cita
-			break;
-		case 7://video
-			$res .= videotag($e['videos'][0]);
+			$miniatura = '/img/1f517.svg';
+			$alt = '';
 			break;
 		default:
 			if(!empty($e['fotos'][0]['src'])):
-				$res .= imgtag($e['fotos'][0], $e);
-			else:
-				$res .= '<picture><img src="'.NOFOTO.'" alt=""></picture>';
+				$miniatura = cloudtohotlink($e['fotos'][0]['src']);
+				if(!empty($e['fotos'][0]['alt'])):
+					$alt = $e['fotos'][0]['alt'];
+				endif;
 			endif;
 	endswitch;
-	$res .= '<p>'.$e['resumen'].'</p></a></article>';
+	$res .=
+	'<img src="'.$miniatura.'" alt="'.h($alt).'" loading="lazy">'.
+	'<strong>'.h($e['título']).'</strong>'.
+	'<time datetime="'.$e['fechaISO'].'">'.$e['fechaArchivo'].'</time>'.
+	'</a></article>';
 
 	return $res;
+}
+function claseEntrada($e)
+{
+	return 'pagina entrada-'.basename($e['slug']).' tipo-'.TIPO[$e['tipo']];
+}
+function abreEntrada($e)
+{
+	return
+	'<article class="'.claseEntrada($e).'">'.
+	'<h1>'.h($e['título']).'</h1>'.
+	'<p class="fecha-entrada">'.$e['timetag'].'</p>'.
+	'<section class="texto-columna">';
+}
+function cierraEntrada()
+{
+	return '</section></article>';
+}
+function figuraEntrada($f, $e)
+{
+	$horizontal = !empty($f['tan']) && !empty($f['tal']) && $f['tan'] >= $f['tal'];
+	$claseContenedor = $horizontal ? 'contenedor-imagen imagen-horizontal' : 'contenedor-imagen';
+	$figcaption = '';
+	if(!empty($f['dsc'])):
+		$figcaption = '<figcaption>'.$f['dsc'].'</figcaption>';
+	elseif(!empty($f['tit'])):
+		$figcaption = '<figcaption>'.$f['tit'].'</figcaption>';
+	endif;
+	return
+	'<figure class="imagen-columna'.($horizontal?' imagen-relato-horizontal':'').'">'.
+	'<div class="'.$claseContenedor.'">'.
+	imgtag($f, $e).
+	'</div>'.
+	$figcaption.
+	'</figure>';
 }
 function efoto($e)
 {
@@ -302,22 +356,15 @@ function efoto($e)
 		'JSadicional'=>''
 	];
 	$foto['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">';
+	abreEntrada($e);
 	if(!empty($e['fotos'][0]['src'])):
-		$foto['cuerpo'] .= imgtag($e['fotos'][0], $e);
+		$foto['cuerpo'] .= figuraEntrada($e['fotos'][0], $e);
 	else:
-		$foto['cuerpo'] .= '<picture><img src="'.NOFOTO.'" alt=""></picture>';
-	endif;
-	$foto['cuerpo'] .= '<div class="contenido">';
-	if($e['título'] != $e['fechaLarga']):
-		$foto['cuerpo'] .= '<h2>'.$e['título'].'</h2>';
-	else:
-		$foto['cuerpo'] .= '<h2 class="nada">'.$e['título'].'</h2>';
+		$foto['cuerpo'] .= '<figure class="imagen-columna"><div class="contenedor-imagen"><img src="'.NOFOTO.'" alt="" loading="lazy"></div></figure>';
 	endif;
 	$foto['cuerpo'] .=
 	contenido($e['resumen'], $e['contenido']).
-	'<footer>'.$e['timetag'].'</footer>'.
-	'</div></article>';
+	cierraEntrada();
 
 	return $foto;
 }
@@ -329,17 +376,15 @@ function evideo($e)
 		'JSadicional'=>''
 	];
 	$video['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">';
+	abreEntrada($e);
 	if(!empty($e['videos'][0])):
-		$video['cuerpo'] .= videotag($e['videos'][0]);
+		$video['cuerpo'] .= '<figure class="imagen-columna"><div class="contenedor-imagen imagen-horizontal">'.videotag($e['videos'][0]).'</div></figure>';
 	else:
-		$video['cuerpo'] .= '<picture><img src="'.NOFOTO.'" alt=""></picture>';
+		$video['cuerpo'] .= '<figure class="imagen-columna"><div class="contenedor-imagen"><img src="'.NOFOTO.'" alt="" loading="lazy"></div></figure>';
 	endif;
 	$video['cuerpo'] .=
-	'<div class="contenido">'.
-	'<h2>'.$e['título'].'</h2>'.
 	contenido($e['resumen'], $e['contenido']).
-	'<footer>'.$e['timetag'].'</footer></div></article>';
+	cierraEntrada();
 	return $video;
 }
 function eestado($e)
@@ -350,14 +395,9 @@ function eestado($e)
 		'JSadicional'=>''
 	];
 	$estado['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">'.
-	'<div>'.
+	abreEntrada($e).
 	contenido($e['resumen'], $e['contenido']).
-	'</div>'.
-	'<header>'.
-	'<h2>'.$e['timetag'].'</h2>'.
-	'</header>'.
-	'</article>';
+	cierraEntrada();
 
 	return $estado;
 }
@@ -369,14 +409,9 @@ function eenlace($e)
 		'JSadicional'=>''
 	];
 	$enlace['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">'.
-	'<div>'.
+	abreEntrada($e).
 	contenido($e['resumen'], $e['contenido']).
-	'</div>'.
-	'<header>'.
-	'<h2>'.$e['timetag'].'</h2>'.
-	'</header>'.
-	'</article>';
+	cierraEntrada();
 
 	return $enlace;
 }
@@ -388,9 +423,9 @@ function ecita($e)
 		'JSadicional'=>''
 	];
 	$cita['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">'.
+	abreEntrada($e).
 	contenido($e['resumen'], $e['contenido']).
-	'</article>';
+	cierraEntrada();
 	return $cita;
 }
 function eartículo($e)
@@ -401,18 +436,7 @@ function eartículo($e)
 		'JSadicional'=>''
 	];
 	$artículo['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">';
-
-	if($e['título'] != $e['fechaLarga']):
-		$artículo['cuerpo'] .=
-		'<h2>'.$e['título'].'</h2>';
-	else:
-		$artículo['cuerpo'] .=
-		'<h2 class="nada">'.$e['título'].'</h2>';
-	endif;
-
-	$artículo['cuerpo'] .=
-	'<footer>'.$e['timetag'].'</footer>';
+	abreEntrada($e);
 
 	if(!empty($e['resumen'])
 	&& '<p>'.$e['resumen'].'</p>' != $e['contenido']):
@@ -421,16 +445,14 @@ function eartículo($e)
 
 	if(!empty($e['fotos'])):
 		$artículo['cuerpo'] .=
-		'<div class="fotoDestacada">'.
-		imgtag($e['fotos'][0], $e, '100vw').
-		'</div>';
+		figuraEntrada($e['fotos'][0], $e);
 		unset($e['fotos'][0]);
 
 		$busca = '[FOTO]';
 		foreach($e['fotos'] as $k=>$f):
 			$pos = strpos($e['contenido'], $busca);
 			if($pos !== false):
-				$fotains =  imgtag($f, $e);
+				$fotains =  figuraEntrada($f, $e);
 				$e['contenido'] = substr_replace($e['contenido'], $fotains, $pos, strlen($busca));
 				unset($e['fotos'][$k]);
 			else:
@@ -447,7 +469,7 @@ function eartículo($e)
 		$artículo['cuerpo'] .= galeriadefotos($e);
 	endif;
 
-	$artículo['cuerpo'] .= '</article>';
+	$artículo['cuerpo'] .= cierraEntrada();
 
 	return $artículo;
 }
@@ -459,19 +481,10 @@ function egalería($e)
 		'JSadicional'=>''
 	];
 	$galería['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">';
-	if(!empty($e['título'])):
-		$cuerpo .=
-		'<header>'.
-		'<h2>'.$e['título'].'</h2>'.
-		$e['timetag'].
-		'</header>';
-	endif;
-
-	$galería['cuerpo'] .=
+	abreEntrada($e).
 	contenido($e['resumen'], $e['contenido']).
 	galeriadefotos($e).
-	'</article>';
+	cierraEntrada();
 
 	return $galería;
 }
@@ -674,14 +687,12 @@ function ediapositivas($e, $autoplay = FALSE)
 	'<style>'.implode(PHP_EOL,$gc).'</style>';
 
 	$diapositivas['cuerpo'] =
-	'<article class="'.TIPO[$e['tipo']].'">'.
+	abreEntrada($e).
 	'<div class="gslider">'.
 	implode(PHP_EOL,$gh).
-	'</div><div class="contenido">'.
-	'<h2>'.$e['título'].'</h2>'.
+	'</div>'.
 	contenido($e['resumen'], $e['contenido']).
-	'<footer>'.$e['timetag'].'</footer>'.
-	'</div></article>';
+	cierraEntrada();
 
 	return $diapositivas;
 }
@@ -696,39 +707,23 @@ function contenido($resumen, $contenido)
 }
 function galeriadefotos($e)
 {
-	$cuerpo .=
-	'<div class="gal">'.
-	'<input type="radio" id="fot0" class="nada" name="galería">';
-	$lasfotos = array_keys($e['fotos']);
+	$cuerpo = '<div class="galeria-imagenes" data-lightbox-gallery>';
 	foreach($e['fotos'] as $k => $f):
-		$etipo = $e['tipo'];
-		$fotant = $fotsig = '';
-		if(isset($lasfotos[array_search($k, $lasfotos)-1])):
-			$fantid = $lasfotos[array_search($k, $lasfotos)-1];
-			$fotant =
-			'<label for="fot'.($k).'" class="modal ant">'.
-			'&#62298;'.
-			'</label>';
-		endif;
-		if(isset($lasfotos[array_search($k, $lasfotos)+1])):
-			$fsigid = $lasfotos[array_search($k, $lasfotos)+1];
-			$fotsig =
-			'<label for="fot'.($k+2).'" class="modal sig">'.
-			'&#62299;'.
-			'</label>';
+		$src = cloudtohotlink($f['src']);
+		$alt = !empty($f['alt']) ? $f['alt'] : '';
+		$caption = '';
+		if(!empty($f['dsc'])):
+			$caption = '<figcaption>'.$f['dsc'].'</figcaption>';
+		elseif(!empty($f['tit'])):
+			$caption = '<figcaption>'.$f['tit'].'</figcaption>';
 		endif;
 		$cuerpo .=
-		'<label for="fot'.($k+1).'" tabindex="'.$k.'" class="min">'.
-		imgtag($f, $e).
-		'</label>';
-		$e['tipo'] = 'fs';
-		$cuerpo .=
-		'<input type="radio" id="fot'.($k+1).'" name="galería" class="selector">'.
-		'<div class="visor">'.
-		imgtag($f, $e).$fotant.$fotsig.
-		'<label for="fot0" class="cerrar">&#62216;</label>'.
-		'</div>';
-		$e['tipo'] = $etipo;
+		'<figure>'.
+		'<a href="'.$src.'" class="enlace-galeria">'.
+		'<img src="'.$src.'" alt="'.h($alt).'" loading="lazy">'.
+		'</a>'.
+		$caption.
+		'</figure>';
 	endforeach;
 	$cuerpo .= '</div>';
 	return $cuerpo;

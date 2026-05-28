@@ -922,6 +922,32 @@ body.pagina-error > main{
 	min-width:7.5rem;
 }
 
+.navegacion-entrada{
+	display:grid;
+	gap:.75rem;
+	margin:2rem auto 0;
+	font-family:"Victor Mono", monospace;
+	font-size:.72rem;
+	text-align:center;
+	text-shadow:none;
+}
+
+.navegacion-entrada a{
+	display:block;
+	padding:.85rem 1rem;
+	border:1px solid var(--border-default);
+	border-radius:8px;
+	background-color:var(--bg-surface);
+	color:var(--text-heading);
+}
+
+.navegacion-entrada a:hover,
+.navegacion-entrada a:focus{
+	border-color:var(--accent);
+	background-color:var(--bg-surface-alt);
+	color:var(--accent);
+}
+
 .oculto-visualmente{
 	position:absolute;
 	width:1px;
@@ -1231,52 +1257,12 @@ img {
 	display: block;
 }
 
-.más-entradas {
-	position: relative;
-	display: flex;
-	flex-wrap: wrap;
-	padding-top: 4em;
-	gap: 1em;
-	justify-content: center;
-	align-items: flex-start;
-	border-top: 1px solid var(--border-default);
-	margin-top: .5em;
-}
-
-/* TARJETAS / BLOQUES */
-.foto,
-.video,
-.diapositivas,
-.estado,
-.más-entradas article{
-	background-color:var(--bg-surface);
-	border:1px solid var(--border-default);
-	border-radius:5px;
-}
-
 /* CÓDIGO */
 code,pre{
 	background-color:var(--bg-surface);
 	color:var(--text-heading);
 	border-radius:5px;
 	box-shadow:var(--shadow-code);
-}
-
-/* OVERLAY VISOR */
-.visor{
-	backdrop-filter:blur(7px);
-	background-color:var(--bg-overlay);
-}
-
-/* ESTADO */
-.estado{
-	background-color:var(--bg-card);
-	box-shadow:var(--shadow-inset);
-}
-
-/* ARCHIVO */
-#archivo details details{
-	background-color:var(--bg-surface-alt);
 }
 
 /* FOOTER */
@@ -1298,9 +1284,4 @@ body > footer > p{
 .actual{
 	color:var(--accent);
 	border-bottom:1px dotted var(--accent);
-}
-
-/* CERRAR MODAL */
-.visor .cerrar{
-	color:var(--text-danger);
 }
