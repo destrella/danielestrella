@@ -277,7 +277,9 @@ function videotag($v)
 }
 function resumenparaindice($e, $uri = URIPAG)
 {
-	$res = '<article class="preview-entrada">';
+	$esVideo = $e['tipo'] == 7 || (!empty($e['contenido']) && strpos($e['contenido'], '<video') !== false);
+	$clases = 'preview-entrada'.($esVideo ? ' preview-entrada--video' : '');
+	$res = '<article class="'.$clases.'">';
 	if($e['tipo'] == 5
 	&& !empty($e['contenido'])):
 		$lnk = explode('href="', $e['contenido']);

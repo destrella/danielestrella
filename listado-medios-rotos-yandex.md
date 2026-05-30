@@ -7,7 +7,7 @@ Criterio usado:
 - Video roto: videos con `poster="/img/imagen-rota.png"` o fuentes en `giant.gfycat.com`; el host `giant.gfycat.com` no resolvió por DNS al verificarlo.
 - No incluí miniaturas de las páginas de índice del archivo para evitar duplicados; sólo entradas individuales.
 
-Total: 18 entradas, 18 imágenes rotas y 3 videos rotos.
+Total: 17 entradas, 18 imágenes rotas y 2 videos rotos.
 
 ## Entradas
 
@@ -26,7 +26,6 @@ Total: 18 entradas, 18 imágenes rotas y 3 videos rotos.
 | Domingo, 24 de Mayo 2020 a las 13:32 | Domingo, 24 de Mayo 2020 a las 13:32 GMT-05:00 | imagen | 1. Ilustración de una mano verde, simulando caminar, y muestras de color usados | https://danielestrella.com/archivo/2020/05/24133207/ |
 | Sábado, 30 de Mayo 2020 a las 13:58 | ¡Producciones que dan gusto! 😊😊 | imagen | 1. Captura de pantalla de OBS transmitiendo la entrevista de Maria Moctezuma a María San Felipe | https://danielestrella.com/archivo/2020/05/producciones-que-dan-gusto/ |
 | Domingo, 7 de Junio 2020 a las 16:02 | Domingo, 7 de Junio 2020 a las 16:02 GMT-05:00 | imagen | 1. Fichas de los artistas a presentar en el Festival Hanal Balam online 2020 vol II | https://danielestrella.com/archivo/2020/06/07160254/ |
-| Miércoles, 10 de Junio 2020 a las 20:48 | Agradablemente trabajando 👨🏽‍💻🎶🎙️ | video | 1. Video sin alt en HTML. Fuente: /img/imagen-rota.png \| https://giant.gfycat.com/LoathsomeAdmiredHoneyeater.webm \| https://giant.gfycat.com/LoathsomeAdmiredHoneyeater.mp4 | https://danielestrella.com/archivo/2020/06/agradablemente-trabajando/ |
 | Jueves, 11 de Junio 2020 a las 20:56 | Festival Hanal Balam online 2020 vol II | imagen | 1. Fichas de los artistas a presentar en el Festival Hanal Balam online 2020 vol II<br>2. Poster del Festival Hanal Balam online 2020 vol II, con fondo de Huechen Balam y un jaguar pasando<br>3. Programa del día 1 del Festival Hanal Balam online 2020 vol II<br>4. Programa del día 2 del Festival Hanal Balam online 2020 vol II<br>5. Poster del Festival Hanal Balam online 2020 vol II con listado de artistas y dirección para recibir donativos | https://danielestrella.com/archivo/2020/06/festival-hanal-balam-online-2020-vol-ii/ |
 | Miércoles, 29 de Julio 2020 a las 01:03 | ¡Grandes mujeres! 😍 | imagen | 1. Captura de pantalla del programa de transmisión y el video resultante de la entrevista de Maria a Arrabaret Colectiva | https://danielestrella.com/archivo/2020/07/grandes-mujeres/ |
 | Miércoles, 29 de Julio 2020 a las 19:55 | ¡Así pasa cuando sucede! 😅 | imagen | 1. Captura de pantalla del video transmitido con cuadros de las personas rotadas erroneamente | https://danielestrella.com/archivo/2020/07/asi-pasa-cuando-sucede/ |
