@@ -435,12 +435,66 @@ class GalleryLightbox {
 }
 
 /**
+ * Navegación con teclado para la paginación del archivo
+ */
+class ArchivePaginationKeyboard {
+    constructor() {
+        this.pagination = document.querySelector('.paginacion-archivo');
+
+        if (!this.pagination) return;
+
+        this.previousLink = this.findPaginationLink('anterior');
+        this.nextLink = this.findPaginationLink('siguiente');
+
+        if (!this.previousLink && !this.nextLink) return;
+
+        document.addEventListener('keydown', event => this.onKeydown(event));
+    }
+
+    findPaginationLink(label) {
+        const links = Array.from(this.pagination.querySelectorAll('.paginacion-archivo__saltos a[href]'));
+
+        return links.find(link => link.textContent.trim().toLowerCase() === label) || null;
+    }
+
+    onKeydown(event) {
+        if (event.defaultPrevented || this.hasModifierKey(event) || this.shouldIgnoreTarget(event.target)) return;
+
+        if (event.key === 'ArrowLeft' && this.previousLink) {
+            event.preventDefault();
+            this.goTo(this.previousLink);
+            return;
+        }
+
+        if (event.key === 'ArrowRight' && this.nextLink) {
+            event.preventDefault();
+            this.goTo(this.nextLink);
+        }
+    }
+
+    hasModifierKey(event) {
+        return event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+    }
+
+    shouldIgnoreTarget(target) {
+        if (!(target instanceof Element)) return false;
+
+        return Boolean(target.closest('input, textarea, select, button, [contenteditable="true"], [role="textbox"]'));
+    }
+
+    goTo(link) {
+        window.location.assign(link.href);
+    }
+}
+
+/**
  * Inicialización cuando el DOM está listo
  */
 document.addEventListener('DOMContentLoaded', () => {
     // Crear el manager global
     window.livePhotoManager = new LivePhotoManager();
     window.galleryLightbox = new GalleryLightbox();
+    window.archivePaginationKeyboard = new ArchivePaginationKeyboard();
 });
 
 /**
