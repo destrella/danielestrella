@@ -1,2 +1,4 @@
 access_log
 error_log
+.cms/cache/
+listado-medios-rotos-yandex.md
