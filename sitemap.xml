@@ -4,9 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
 <url>
   <loc>https://danielestrella.com/</loc>
   <lastmod>2021-03-29T18:52:28+00:00</lastmod>
@@ -14,23 +11,33 @@
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/</loc>
-  <lastmod>2026-05-28T00:00:00-06:00</lastmod>
+  <lastmod>2026-06-02T00:00:00-06:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/p/2/</loc>
-  <lastmod>2026-05-28T00:00:00-06:00</lastmod>
+  <lastmod>2026-06-02T00:00:00-06:00</lastmod>
   <priority>0.70</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/p/3/</loc>
-  <lastmod>2026-05-28T00:00:00-06:00</lastmod>
+  <lastmod>2026-06-02T00:00:00-06:00</lastmod>
   <priority>0.70</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/p/4/</loc>
-  <lastmod>2026-05-28T00:00:00-06:00</lastmod>
+  <lastmod>2026-06-02T00:00:00-06:00</lastmod>
   <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/p/5/</loc>
+  <lastmod>2026-06-02T00:00:00-06:00</lastmod>
+  <priority>0.70</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2026/05/el-subwoofer-de-100-pulgadas/</loc>
+  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2026/05/2b-y-sabrina/</loc>
@@ -39,334 +46,432 @@
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2026/05/yorha-automata/</loc>
-  <lastmod>2026-05-07T01:42:00-06:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2026/05/el-subwoofer-de-100-pulgadas/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2010/04/babbling-out-about-relationships/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2009/10/where-is-the-today/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2009/11/lonely-rainbow/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2009/10/the-girl-who-asked-me-for-a-hug/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2007/02/carnaval-de-merida/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2007/02/my-sassy-girl/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/12/feliz-anio-nuevo/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/12/feliz-navidad/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/12/the-mad-russians-christmas/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/11/se-acerca-navidad/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/09/finally-the-pics/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/08/playa-del-carmen/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2006/08/el-inicio/</loc>
-  <lastmod>2026-05-16T00:00:00-06:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2021/01/anio-nuevo-distro-nueva/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2021/01/feliz-anio-nuevo/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/12/y-lo-que-trajo-santa-claus-moda-primavera-verano-2021/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/11/turisteando-en-tiempos-de-covid-19/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/11/altar-pequeno-de-dia-de-muertos/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/08/selfie-en-la-camioneta/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/08/se-acabo-lo-que-se-vendia/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/transmitiendo-una-entrevista-desde-la-laptop/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/asi-pasa-cuando-sucede/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/grandes-mujeres/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/preparando-el-maletero-para-el-viaje/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/ventanas-nuevas/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/proteccion-contra-mosquitos/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/camisa-de-franela-vatos-locos/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/firmando-autografos/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/noche-de-netflix-proyectada-en-la-pared/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/mesa-de-botanas-y-cervezas/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/pibes-listos-para-el-horno-de-tierra/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/07/saludos-desde-huechen-balam/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/06/rescatando-una-laptop-desde-la-hamaca/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/06/festival-hanal-balam-online-2020-vol-ii/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/06/agradablemente-trabajando/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/06/07160254/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/06/un-buen-vino-para-una-buena-labor/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/05/producciones-que-dan-gusto/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/05/24133207/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/05/maria-moctezuma-tocando-en-vivo-desde-su-estudio/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/05/estudio-listo-para-transmitir-en-vivo/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/05/03171742/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
+  <lastmod>2026-05-07T01:01:00-06:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2021/01/la-ultima-de-sabrina-cuando-aparecio-que-ni-cuenta-me-di/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2021-01-04T22:50:28-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2020/11/23112738/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2021/01/anio-nuevo-distro-nueva/</loc>
+  <lastmod>2021-01-02T14:59:28-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/12/y-lo-que-trajo-santa-claus-moda-primavera-verano-2021/</loc>
+  <lastmod>2020-12-25T19:45:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/11/turisteando-en-tiempos-de-covid-19/</loc>
+  <lastmod>2020-11-26T11:37:41-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/11/altar-pequeno-de-dia-de-muertos/</loc>
+  <lastmod>2020-11-01T19:19:36-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/10/feliz-cumpleanos/</loc>
+  <lastmod>2020-10-21T23:37:47-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/08/selfie-en-la-camioneta/</loc>
+  <lastmod>2020-08-24T02:26:44-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/08/beep-beep/</loc>
+  <lastmod>2020-08-16T19:51:02-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/08/se-acabo-lo-que-se-vendia/</loc>
+  <lastmod>2020-08-16T00:21:24-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/08/en-la-futura-piscina/</loc>
+  <lastmod>2020-08-05T19:33:27-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/transmitiendo-una-entrevista-desde-la-laptop/</loc>
+  <lastmod>2020-07-31T13:30:00-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/asi-pasa-cuando-sucede/</loc>
+  <lastmod>2020-07-29T19:55:16-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/grandes-mujeres/</loc>
+  <lastmod>2020-07-29T01:03:27-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/preparando-el-maletero-para-el-viaje/</loc>
+  <lastmod>2020-07-25T12:58:41-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/ventanas-nuevas/</loc>
+  <lastmod>2020-07-23T17:12:20-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/proteccion-contra-mosquitos/</loc>
+  <lastmod>2020-07-20T18:28:53-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/camisa-de-franela-vatos-locos/</loc>
+  <lastmod>2020-07-18T15:13:23-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/firmando-autografos/</loc>
+  <lastmod>2020-07-16T15:03:02-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/noche-de-netflix-proyectada-en-la-pared/</loc>
+  <lastmod>2020-07-04T23:24:18-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/mesa-de-botanas-y-cervezas/</loc>
+  <lastmod>2020-07-04T13:04:38-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/pibes-listos-para-el-horno-de-tierra/</loc>
+  <lastmod>2020-07-02T20:35:31-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/07/saludos-desde-huechen-balam/</loc>
+  <lastmod>2020-07-01T22:14:34-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/rescatando-una-laptop-desde-la-hamaca/</loc>
+  <lastmod>2020-06-30T19:35:05-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/festival-hanal-balam-online-2020-vol-ii/</loc>
+  <lastmod>2020-06-11T20:56:49-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/agradablemente-trabajando/</loc>
+  <lastmod>2020-06-10T20:48:51-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/mucho-talento/</loc>
+  <lastmod>2020-06-07T16:02:54-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/festival-hanal-balam-online-2020/</loc>
+  <lastmod>2020-06-05T15:05:17-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/06/un-buen-vino-para-una-buena-labor/</loc>
+  <lastmod>2020-06-02T23:09:00-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/05/producciones-que-dan-gusto/</loc>
+  <lastmod>2020-05-30T13:58:52-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/05/colaborando-ando/</loc>
+  <lastmod>2020-05-24T13:32:07-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/05/maria-moctezuma-tocando-en-vivo-desde-su-estudio/</loc>
+  <lastmod>2020-05-15T20:32:29-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/05/estudio-listo-para-transmitir-en-vivo/</loc>
+  <lastmod>2020-05-15T20:19:02-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/05/ya-casi/</loc>
+  <lastmod>2020-05-03T17:17:42-05:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/05/maria-moctezuma-interpretando-como-animal-a-su-presa/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-05-02T20:06:08-05:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2020/04/21230126/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2020/05/dos-anos-ya/</loc>
+  <lastmod>2020-05-01T20:42:16-05:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2020/04/12102241/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2020/04/hoy-pero-del-2017-pura-diversion/</loc>
+  <lastmod>2020-04-22T12:15:58-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/04/el-arte-del-diseno/</loc>
+  <lastmod>2020-04-21T23:01:26-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/04/hoy-pero-de-2006-disfrutando-un-frapuccino-oreo-en-xalapa/</loc>
+  <lastmod>2020-04-20T09:50:42-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2020/04/jardineando-ando/</loc>
+  <lastmod>2020-04-12T10:22:41-05:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/03/playeras-personalizadas-los-3-estrella/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-03-31T22:33:09-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/03/selfie-con-el-dr-simi/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-03-28T16:15:23-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2020/03/07202257/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2020/03/jugando-y-soportando/</loc>
+  <lastmod>2020-03-26T20:38:51-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2020/03/04213714/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/02/19232932/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/02/10223315/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2020/03/turisteando-ando/</loc>
+  <lastmod>2020-03-07T20:22:57-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/02/pizza-tacos-y-cervezas/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-02-07T17:33:36-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/02/trabajando-arduamente/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-02-05T13:35:40-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/01/vectorizacion-para-serigrafia/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-01-25T13:11:19-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/01/impresora-a3-recien-desempaquetada/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-01-21T12:14:52-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/01/baile-de-graduacion-de-la-primaria/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/01/13104523/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-01-18T15:47:00-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2020/01/piano-antes-del-recital-en-el-olimpo/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://danielestrella.com/archivo/2020/01/06174754/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2020-01-07T22:23:23-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2019/12/en-videito-se-ve-mejor/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2019-12-07T19:04:59-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://danielestrella.com/archivo/2019/12/juliamanrique_/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <loc>https://danielestrella.com/archivo/2019/12/juliamanrique/</loc>
+  <lastmod>2019-12-07T15:48:37-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
   <loc>https://danielestrella.com/archivo/2019/11/la-foto-con-toy-story/</loc>
-  <lastmod>2021-03-29T18:52:28+00:00</lastmod>
-  <priority>0.64</priority>
+  <lastmod>2019-11-14T13:48:33-06:00</lastmod>
+  <priority>0.80</priority>
 </url>
-
-
+<url>
+  <loc>https://danielestrella.com/archivo/2019/03/y-del-rodeo-tambien/</loc>
+  <lastmod>2019-03-24T03:48:30-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2019/03/noche-de-mayan-pub/</loc>
+  <lastmod>2019-03-23T22:07:15-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2019/01/isla-mujeres/</loc>
+  <lastmod>2019-01-08T17:43:22-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2018/12/camino-a-casa/</loc>
+  <lastmod>2018-12-25T23:01:37-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2018/07/palacio-de-la-musica/</loc>
+  <lastmod>2018-07-17T23:39:43-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2018/03/naaam/</loc>
+  <lastmod>2018-03-12T19:11:01-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2015/01/las-madrinas-y-su-invitado-especial/</loc>
+  <lastmod>2015-01-24T19:08:33-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2015/01/las-del-recuerdo/</loc>
+  <lastmod>2015-01-19T08:55:36-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2015/01/fotito/</loc>
+  <lastmod>2015-01-15T17:37:19-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2015/01/buenos-dias-mundo/</loc>
+  <lastmod>2015-01-13T06:37:03-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2015/01/aqui-casual-con-las-madrinas/</loc>
+  <lastmod>2015-01-11T23:24:42-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/09/someone-did-this-don-t-know-when-and-i-just-saw-it-today-xd/</loc>
+  <lastmod>2014-09-29T09:17:15-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/09/hola-mundo/</loc>
+  <lastmod>2014-09-24T11:08:11-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/09/viva-mexico/</loc>
+  <lastmod>2014-09-16T00:16:58-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/09/fotito/</loc>
+  <lastmod>2014-09-13T18:10:07-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/09/buenas-noches-mundo-hora-de-dormir/</loc>
+  <lastmod>2014-09-08T22:25:22-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/08/buenos-dias-mundo/</loc>
+  <lastmod>2014-08-22T06:24:24-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/07/frutas-embasadas-pasillo-11-xd/</loc>
+  <lastmod>2014-07-19T20:51:34-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/07/cervecita-de-semifinal/</loc>
+  <lastmod>2014-07-08T16:04:17-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/07/una-tarde-como-cualquier-otra/</loc>
+  <lastmod>2014-07-05T21:04:33-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/nuevo-corte-xd/</loc>
+  <lastmod>2014-06-24T13:13:52-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/ahora-parece-que-las-hamburguesas-me-persiguen-xd/</loc>
+  <lastmod>2014-06-22T19:46:52-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/ah-esta-si-es-una-hamburguesa/</loc>
+  <lastmod>2014-06-18T18:18:46-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/si-si-hay-un-castillo-detras-de-mi-continuemos-xd/</loc>
+  <lastmod>2014-06-10T12:06:39-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/no-andaba-muerto-andaba-de-parranda-x-d/</loc>
+  <lastmod>2014-06-07T08:29:16-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/si-bueno-aqui-sigo-otro-dia-otra-ventana-xd/</loc>
+  <lastmod>2014-06-05T12:18:04-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2014/06/bruselas-cuarto-para-las-9-de-la-noche-xd/</loc>
+  <lastmod>2014-06-04T13:47:15-05:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2009/11/lonely-rainbow/</loc>
+  <lastmod>2009-11-03T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2009/10/the-girl-who-asked-me-for-a-hug/</loc>
+  <lastmod>2009-10-23T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2009/10/where-is-the-today/</loc>
+  <lastmod>2009-10-22T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2007/02/my-sassy-girl/</loc>
+  <lastmod>2007-02-13T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2006/09/finally-the-pics/</loc>
+  <lastmod>2006-09-23T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://danielestrella.com/archivo/2006/08/playa-del-carmen/</loc>
+  <lastmod>2006-08-13T00:00:00-06:00</lastmod>
+  <priority>0.80</priority>
+</url>
 </urlset>
