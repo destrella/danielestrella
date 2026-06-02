@@ -2,3 +2,5 @@ access_log
 error_log
 .cms/cache/
 listado-medios-rotos-yandex.md
+tmp/instagram-import/media/
+tmp/instagram-import/registro-medios-instagram.csv
