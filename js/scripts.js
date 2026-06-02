@@ -195,7 +195,7 @@ class LivePhoto {
 }
 
 /**
- * Lightbox sencillo para galerías de imágenes
+ * Lightbox sencillo para galerías de imágenes y videos.
  */
 class GalleryLightbox {
     constructor() {
@@ -229,46 +229,55 @@ class GalleryLightbox {
     }
 
     getItems(gallery) {
-        const usedImages = new Set();
+        const usedMedia = new Set();
         const items = [];
 
         gallery.querySelectorAll('figure').forEach(figure => {
-            const img = figure.querySelector('img');
+            const media = figure.querySelector('img, video');
 
-            if (!img) return;
+            if (!media) return;
 
-            usedImages.add(img);
-            items.push(this.createItem(img, figure));
+            usedMedia.add(media);
+            items.push(this.createItem(media, figure));
         });
 
-        gallery.querySelectorAll('img').forEach(img => {
-            if (usedImages.has(img)) return;
-            items.push(this.createItem(img, null));
+        gallery.querySelectorAll('img, video').forEach(media => {
+            if (usedMedia.has(media)) return;
+            items.push(this.createItem(media, null));
         });
 
         return items;
     }
 
-    createItem(img, figure) {
-        const link = img.closest('a[href]');
+    createItem(media, figure) {
+        const isVideo = media.tagName === 'VIDEO';
+        const link = media.closest('a[href]');
         const captionElement = figure?.querySelector('figcaption');
-        const caption = img.dataset.caption || captionElement?.textContent.trim() || img.alt || '';
+        const caption = media.dataset.caption || captionElement?.textContent.trim() || media.getAttribute('aria-label') || media.alt || '';
+        const source = isVideo ? media.querySelector('source') : null;
 
         return {
-            img,
+            type: isVideo ? 'video' : 'image',
+            media,
             link,
-            trigger: link || img,
+            trigger: link || media,
             get src() {
-                return img.dataset.full || link?.href || img.currentSrc || img.src;
+                if (isVideo) {
+                    return media.dataset.full || source?.src || media.currentSrc || media.src || link?.href;
+                }
+
+                return media.dataset.full || link?.href || media.currentSrc || media.src;
             },
-            alt: img.alt || caption,
+            poster: isVideo ? media.getAttribute('poster') || '' : '',
+            sourceType: isVideo ? source?.type || '' : '',
+            alt: media.alt || media.getAttribute('aria-label') || caption,
             caption
         };
     }
 
     prepareTrigger(item, galleryData, index) {
         const { trigger } = item;
-        const label = `Abrir imagen ${index + 1} de ${galleryData.items.length}`;
+        const label = `Abrir ${item.type === 'video' ? 'video' : 'imagen'} ${index + 1} de ${galleryData.items.length}`;
 
         if (trigger.tagName === 'A') {
             trigger.classList.add('enlace-galeria');
@@ -285,7 +294,7 @@ class GalleryLightbox {
         });
 
         trigger.addEventListener('keydown', event => {
-            if (event.key !== ' ') return;
+            if (event.key !== ' ' && event.key !== 'Enter') return;
 
             event.preventDefault();
             this.open(galleryData, index);
@@ -297,16 +306,17 @@ class GalleryLightbox {
         this.lightbox.className = 'lightbox-galeria';
         this.lightbox.setAttribute('role', 'dialog');
         this.lightbox.setAttribute('aria-modal', 'true');
-        this.lightbox.setAttribute('aria-label', 'Visor de imágenes');
+        this.lightbox.setAttribute('aria-label', 'Visor de galería');
         this.lightbox.hidden = true;
         this.lightbox.innerHTML = `
             <div class="lightbox-galeria__backdrop" data-lightbox-close></div>
             <div class="lightbox-galeria__panel">
-                <button type="button" class="lightbox-galeria__boton lightbox-galeria__cerrar" data-lightbox-close aria-label="Cerrar imagen">&times;</button>
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__cerrar" data-lightbox-close aria-label="Cerrar galería">&times;</button>
                 <p class="lightbox-galeria__contador" aria-live="polite"></p>
-                <button type="button" class="lightbox-galeria__boton lightbox-galeria__anterior" aria-label="Imagen anterior">&#8249;</button>
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__anterior" aria-label="Elemento anterior">&#8249;</button>
                 <img class="lightbox-galeria__imagen" alt="">
-                <button type="button" class="lightbox-galeria__boton lightbox-galeria__siguiente" aria-label="Imagen siguiente">&#8250;</button>
+                <video class="lightbox-galeria__video" controls autoplay muted playsinline preload="metadata" hidden><source></video>
+                <button type="button" class="lightbox-galeria__boton lightbox-galeria__siguiente" aria-label="Elemento siguiente">&#8250;</button>
                 <p class="lightbox-galeria__caption"></p>
             </div>
         `;
@@ -314,6 +324,8 @@ class GalleryLightbox {
         document.body.appendChild(this.lightbox);
 
         this.image = this.lightbox.querySelector('.lightbox-galeria__imagen');
+        this.video = this.lightbox.querySelector('.lightbox-galeria__video');
+        this.videoSource = this.video.querySelector('source');
         this.caption = this.lightbox.querySelector('.lightbox-galeria__caption');
         this.counter = this.lightbox.querySelector('.lightbox-galeria__contador');
         this.closeButton = this.lightbox.querySelector('.lightbox-galeria__cerrar');
@@ -334,8 +346,8 @@ class GalleryLightbox {
         this.isOpen = true;
         this.lastFocused = document.activeElement;
 
-        this.render();
         this.lightbox.hidden = false;
+        this.render();
         document.body.classList.add('lightbox-abierto');
 
         requestAnimationFrame(() => {
@@ -355,7 +367,7 @@ class GalleryLightbox {
             if (this.isOpen) return;
 
             this.lightbox.hidden = true;
-            this.image.removeAttribute('src');
+            this.resetMedia();
             this.caption.textContent = '';
         }, 180);
 
@@ -366,14 +378,48 @@ class GalleryLightbox {
         const item = this.currentGallery.items[this.currentIndex];
         const total = this.currentGallery.items.length;
 
-        this.image.src = item.src;
-        this.image.alt = item.alt;
+        this.resetMedia();
+        if (item.type === 'video') {
+            this.image.hidden = true;
+            this.video.hidden = false;
+            this.videoSource.src = item.src;
+            if (item.sourceType) {
+                this.videoSource.type = item.sourceType;
+            }
+            if (item.poster) {
+                this.video.poster = item.poster;
+            }
+            this.video.setAttribute('aria-label', item.alt || item.caption || 'Video de galería');
+            this.video.muted = true;
+            this.video.load();
+            const playPromise = this.video.play();
+            if (playPromise && typeof playPromise.catch === 'function') {
+                playPromise.catch(() => {});
+            }
+        } else {
+            this.video.hidden = true;
+            this.image.hidden = false;
+            this.image.src = item.src;
+            this.image.alt = item.alt;
+        }
         this.caption.textContent = item.caption;
         this.caption.hidden = !item.caption;
         this.counter.textContent = `${this.currentIndex + 1} / ${total}`;
         this.counter.hidden = total < 2;
         this.previousButton.hidden = total < 2;
         this.nextButton.hidden = total < 2;
+    }
+
+    resetMedia() {
+        this.image.removeAttribute('src');
+        this.image.hidden = false;
+        this.video.pause();
+        this.video.removeAttribute('src');
+        this.video.removeAttribute('poster');
+        this.videoSource.removeAttribute('src');
+        this.videoSource.removeAttribute('type');
+        this.video.hidden = true;
+        this.video.load();
     }
 
     showPrevious() {
@@ -415,7 +461,7 @@ class GalleryLightbox {
     }
 
     trapFocus(event) {
-        const focusable = Array.from(this.lightbox.querySelectorAll('button:not([hidden])'));
+        const focusable = Array.from(this.lightbox.querySelectorAll('button:not([hidden]), video:not([hidden])'));
         const first = focusable[0];
         const last = focusable[focusable.length - 1];
 
