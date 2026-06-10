@@ -159,6 +159,16 @@ article > section > quote{
 	margin:1rem 0;
 	padding:.85rem 1rem .85rem 1.15rem;
 }
+q{
+	padding:.05em .35em .08em;
+	border:1px solid rgba(255,204,0,.28);
+	border-radius:.35em;
+	background:linear-gradient(180deg, rgba(255,204,0,.12), rgba(255,204,0,.04));
+	box-decoration-break:clone;
+	-webkit-box-decoration-break:clone;
+	color:var(--text-heading);
+	text-shadow:none;
+}
 
 h1{
 	text-align: center;
@@ -289,6 +299,32 @@ article > section{
 	font-family: "Lavishly Yours", cursive;
 }
 
+.texto-columna blockquote {
+	margin: 1.25rem 0;
+	padding: .9rem 1rem;
+	border-left: 3px solid var(--accent);
+	border-radius: 0 8px 8px 0;
+	background: var(--bg-surface);
+}
+
+.texto-columna blockquote p {
+	margin-bottom: 0;
+}
+
+.texto-columna blockquote p:first-child {
+	margin-top: 0;
+	font-family: "Courier New", Courier, "Nimbus Mono L", monospace;
+	font-size: .95em;
+	letter-spacing: .01em;
+}
+
+.texto-columna blockquote p::first-letter {
+	font-family: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	line-height: inherit;
+}
+
 .foto-estatica-texto{
 	width:min(100%, 440px);
 	margin:2rem auto;
@@ -412,6 +448,17 @@ article > section{
 
 .imagen-relato-horizontal {
 	padding: 1.5em 0;
+}
+
+.live-photo-bloque-final {
+	display: grid;
+	justify-items: center;
+}
+
+.live-photo-centrada {
+	width: min(100%, 760px);
+	margin: 1rem auto 0;
+	padding: 0;
 }
 
 /* La imagen y el video comparten el mismo espacio */
